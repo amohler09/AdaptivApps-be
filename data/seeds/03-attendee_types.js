@@ -5,17 +5,13 @@ exports.seed = function(knex) {
     .then(function () {
       return knex('attendee_types').insert([
         {id: 1, 
-          name: 'Athlete', 
-          role_id: 2},
+          name: 'Athlete'},
         {id: 2, 
-          name: 'Parent', 
-          role_id: 2},
+          name: 'Parent'},
         {id: 3, 
-          name: 'Coach', 
-          role_id: 2},
+          name: 'Coach'},
         {id: 4, 
-          name: 'Volunteer', 
-          role_id: 2}
+          name: 'Volunteer'}
       ]);
     });
 };
