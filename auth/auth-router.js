@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const Users = require('../users/users-model');
 
 // POST - register
-router.post('/register', (req, res) => {
+router.post('/signup', (req, res) => {
   let email = req.body;
   const hash = bcrypt.hashSync(email.password, 8);
   email.password = hash;
