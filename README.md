@@ -31,9 +31,9 @@ Sign Up & Login:
 (For Admins only) User Information:
 
 /api/auth
-  GET
+  GET/POST
   - /users
-  POST/PUT/DELETE
+  PUT/DELETE
   - /users/:id
 
 #### Authorization Routes
@@ -49,7 +49,7 @@ Sign Up & Login:
 | ------ | ----------------------- | ------------------- | ---------------------- |
 | GET    | `/users`                | admins only         | Returns info for users |
 | GET    | `/users/:id`            | admins only         | Returns specific user's email, role_id and id     |
-
+| POST   | `/users`                | admins only         | Create new user        |
 | PUT    | `/users/:id`            | admins only         | Edit user's info       |
 | DELETE | `/users/:id`            | admins only         | Delete a user          |
 
