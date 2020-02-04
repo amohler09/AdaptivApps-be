@@ -84,6 +84,44 @@ Sign Up & Login:
 }
 ```
 
+#### Genders
+```
+{
+  id: UUID
+  genders: STRING
+}
+```
+
+#### Disabilities
+```
+{
+  id: UUID
+  name: STRING
+  disability_group_id: UUID foreign key in DISABILITY_GROUPS table
+}
+```
+#### Disability Groups
+```
+{
+  id: UUID
+  name: STRING
+}
+```
+#### Roles
+```
+{
+  id: UUID
+  name: STRING
+}
+```
+#### Attendee Types
+```
+{
+  id: UUID
+  name: STRING
+}
+
+
 ## 2️⃣ Actions
 USERS
 
