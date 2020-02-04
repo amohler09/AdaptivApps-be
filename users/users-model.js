@@ -27,22 +27,17 @@ function getById(id) {
     .first();
 };
 
-function add(user) {
-  return db('users')
-    .insert(user)
-    .then(ids => {
-      const [id] = ids;
-      return getById({ id })
-    });
+async function add(user) {
+  const [id] = await db('users')
+    .insert(user, 'id')
+
+    return getById(id)
 };
 
 function editUser(changes, id) {
   return db('users')
-    .insert(users)
-    .then(ids => {
-      const [id] = ids
-      return getById({ id })
-    })
+    .where({ id })
+    .update(changes, 'id')
 };
 
 function deleteUser(id) {
