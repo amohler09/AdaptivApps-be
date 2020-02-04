@@ -47,7 +47,29 @@ router.get('/:id', checkRole, restricted, (req, res) => {
     })
 });
 
-// PUT - users    >>>   NOT WORKING
+// POST - users
+router.post('/', checkRole, restricted, (req, res) => {
+  const userData = req.body;
+
+  if (userData) {
+    Users.add(userData)
+      .then(newUser => {
+        res.status(201)
+          .json({ newUser, message: 'New user created' })
+      })
+      .catch(err => {
+        console.log('Error adding new user', err)
+        res.status(404)
+          .json({ message: 'Please provide required information' })
+      })
+  } else {
+    console.log('Error posting new user', err)
+    res.status(500)
+      .json({ message: 'Failed to add new user' })
+  }
+});
+
+// PUT - users
 router.put('/:id', checkRole, restricted, (req, res) => {
   const { id } = req.params;
   const changes = req.body;
