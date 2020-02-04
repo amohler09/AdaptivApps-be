@@ -1,15 +1,15 @@
 const router = require('express').Router();
 
-const Users = require('./users-modal');
+const Users = require('./users-model');
 const restricted = require('../auth/authenticate-middleware');
 
 function checkRole(req, res, next) {
   if (req.token.role == 1) {
-      next()
+    next()
   } else {
-      console.log('Not Authorized');
-      res.status(403)
-          .json({ message: 'Not authorized, you must be an ACS Admin'})
+    console.log('Not Authorized');
+    res.status(403)
+      .json({ message: 'Not authorized, you must be an ACS Admin'})
   }
 };
 
@@ -25,6 +25,70 @@ router.get('/', checkRole, restricted, (req, res) => {
       res.status(500)
         .json({ message: 'Could get retrieve users' })
     });      
+});
+
+// GET - users - byId
+router.get('/:id', checkRole, restricted, (req, res) => {
+  const { id } = req.params;
+
+  Users.getById(id)
+    .then(user => {
+      if (user) {
+        res.json(user)
+      } else {
+        res.status(404)
+          .json({ message: 'Could not find user with given id' })
+      }
+    })
+    .catch(err => {
+      console.log('Error finding user GET', err)
+      res.status(500)
+        .json({ message: 'Failed to get user' })
+    })
+});
+
+// PUT - users    >>>   NOT WORKING
+router.put('/:id', checkRole, restricted, (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  Users.getById(id)
+    .then(findUser => {
+      if (findUser) {
+        Users.editUser(changes, id)
+          .then(updatedUser => {
+            res.json(updatedUser)
+          })
+      } else {
+        res.status(404)
+          .json({ message: 'Could not find user with given id' })
+      }
+    })
+    .catch(err => {
+      console.log('Error updating class PUT', err)
+      res.status(500)
+        .json({ message: 'Failed to update user information' })
+    })
+});
+
+// DELETE - users
+router.delete('/:id', checkRole, restricted, (req, res) => {
+  const { id } = req.params;
+
+  Users.deleteUser(id)
+    .then(deleted => {
+      if (deleted) {
+        res.json({ removed: deleted })
+      } else {
+        res.status(404)
+          .json({ message: 'Could not find user with the given id' })
+      }
+    })
+    .catch(err => {
+      console.log('Error deleting user DELETE', err)
+      res.status(500)
+        .json({ message: 'Failed to delete user' })
+    })
 });
 
 module.exports = router;

@@ -5,13 +5,14 @@ module.exports = {
   getBy,
   getById,
   add,
+  editUser,
   deleteUser,
 };
 
 // Users
 function get() {
   return db('users')
-    .select('id', 'email', 'password', 'role_id');
+    .select('id', 'email', 'role_id');
 };
 
 function getBy(filter) {
@@ -33,6 +34,15 @@ function add(user) {
       const [id] = ids;
       return getById({ id })
     });
+};
+
+function editUser(changes, id) {
+  return db('users')
+    .insert(users)
+    .then(ids => {
+      const [id] = ids
+      return getById({ id })
+    })
 };
 
 function deleteUser(id) {
