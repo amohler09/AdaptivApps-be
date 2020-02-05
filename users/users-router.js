@@ -113,4 +113,55 @@ router.delete('/:id', checkRole, restricted, (req, res) => {
     })
 });
 
+// PROFILES ***************************************************
+
+// // POST - profiles
+// router.get('/:user_id/profile', checkRole, restricted, (req, res) => {
+//   const { user_id } = req.params;
+//   const profile = req.body;
+
+//   Users.getById(user_id)
+//     // .then(findUser => {
+//     //   if (findUser) {
+//     //     Users.addProfile(user_id, profile)
+//     //       .then(newProfile => {
+//     //         res.json(newProfile)
+//     //       })
+//       .then(user => {
+//         if (user) {
+//           res.json(user)
+//         } else {
+//         res.status(404)
+//           .json({ message: 'Could not create profile' })
+//       }
+//     })
+//     .catch(err => {
+//       console.log('Error creating class POST', err)
+//       res.status(500)
+//         .json({ message: 'Failed to create user profile' })
+//     })
+// });
+
+// GET profiles by user_id
+router.get('/:id/profile', restricted, (req, res) => {
+  const { id } = req.params;
+
+  Users.getProfileByUserId(id)
+    .then(profile => {
+      console.log('req.token.id', req.token.id);
+      console.log('id', id);
+      if (profile && Number(req.token.id) === Number(id)) {
+        res.status(200).json(profile)
+      } else {
+        res.status(404)
+          .json({ message: 'Could not find profile with given user id.' })
+      }
+    })
+    .catch(err => {
+      res.status(500)
+        .json({ message: 'Failed to get profile' })
+    })
+});
+
+
 module.exports = router;
