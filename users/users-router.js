@@ -113,4 +113,69 @@ router.delete('/:id', checkRole, restricted, (req, res) => {
     })
 });
 
+// PROFILES ***************************************************
+
+// POST - profiles
+router.post('/:id', restricted, (req, res) => {
+  const { id } = req.params;
+  const profile = req.body;
+
+  Users.addProfile(id, profile)
+    .then(newProfile => {
+      if (newProfile && Number(req.token.id) === Number(id)) {
+        res.status(200).json(newProfile)
+      } else {
+        res.status(404)
+          .json({ message: 'Could not create profile' })
+      }
+    })
+    .catch(err => {
+      console.log('Error creating class POST', err)
+      res.status(500)
+        .json({ message: 'Failed to create user profile' })
+    })
+});
+
+// GET - profiles
+router.get('/:id/profile', restricted, (req, res) => {
+  const { id } = req.params;
+
+  Users.getProfileByUserId(id)
+    .then(profile => {
+      if (profile && Number(req.token.id) === Number(id)) {
+        res.status(200).json(profile)
+      } else {
+        res.status(404)
+          .json({ message: 'Could not find profile with given user id.' })
+      }
+    })
+    .catch(err => {
+      res.status(500)
+        .json({ message: 'Failed to get profile' })
+    })
+});
+
+// PUT - edit profile
+router.put('/:id/profile', restricted, (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  Users.getProfileByUserId(id)
+    .then(profile => {
+      if (profile && Number(req.token.id) === Number(id)) {
+        Users.editProfile(changes, id)
+          .then(updatedProfile => {
+            res.status(200).json(updatedProfile)
+          })
+      } else {
+        res.status(404)
+          .json({ message: 'Could not edit profile with given user id.' })
+      }
+    })
+    .catch(err => {
+      res.status(500)
+        .json({ message: 'Failed to edit profile' })
+    })
+});
+
 module.exports = router;
