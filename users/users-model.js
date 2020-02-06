@@ -8,7 +8,7 @@ module.exports = {
   editUser,
   deleteUser,
   getProfileByUserId,
-  // addProfile,
+  addProfile,
 };
 
 // Users
@@ -49,17 +49,16 @@ function deleteUser(id) {
     .del();
 };
 
-// USER PROFILES
-function getProfileByUserId(id) {
+// USER PROFILES *********************************
+
+function getProfileByUserId(user_id) {
   return db("user_profiles")
-  // .select('user_profiles.id', 'user_profiles.username')
-  // .where('user_profiles.user_id', id);
-  .where({user_id: id});
+  .where({user_id: user_id});
 }
 
-// function addProfile(user_id, profile) {
-//   return db("user_profiles as profiles")
-//   .where({ user_id })
-//   .first()
-//   .insert(profile)
-// }
+function addProfile(user_id, profile) {
+  return db('user_profiles')
+    .where({ user_id })
+    .first()
+    .insert(profile)
+};
