@@ -9,6 +9,7 @@ module.exports = {
   deleteUser,
   getProfileByUserId,
   addProfile,
+  editProfile
 };
 
 // Users
@@ -53,7 +54,8 @@ function deleteUser(id) {
 
 function getProfileByUserId(user_id) {
   return db("user_profiles")
-  .where({user_id: user_id});
+  .where({user_id: user_id})
+  .first();
 }
 
 function addProfile(user_id, profile) {
@@ -61,4 +63,10 @@ function addProfile(user_id, profile) {
     .where({ user_id })
     .first()
     .insert(profile)
+};
+
+function editProfile(changes, user_id) {
+  return db('user_profiles')
+    .where({ user_id })
+    .update(changes, 'user_id')
 };

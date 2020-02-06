@@ -155,5 +155,27 @@ router.get('/:id/profile', restricted, (req, res) => {
     })
 });
 
+// PUT - edit profile
+router.put('/:id/profile', restricted, (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  Users.getProfileByUserId(id)
+    .then(profile => {
+      if (profile && Number(req.token.id) === Number(id)) {
+        Users.editProfile(changes, id)
+          .then(updatedProfile => {
+            res.status(200).json(updatedProfile)
+          })
+      } else {
+        res.status(404)
+          .json({ message: 'Could not edit profile with given user id.' })
+      }
+    })
+    .catch(err => {
+      res.status(500)
+        .json({ message: 'Failed to edit profile' })
+    })
+});
 
 module.exports = router;
