@@ -1,10 +1,13 @@
-type User {
+type Profile @key(fields: "email"){
   id: ID! @id
-  profile: Profile
-}
-
-type Profile {
-  id: ID! @id
-  favorite_color: String
-  favorite_shape: String
+  email: String!
+  firstName: String
+  lastName: String
+  displayName: String
+  birthday: String
+  bio: String
+  disability: String
+  legal: Boolean
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }

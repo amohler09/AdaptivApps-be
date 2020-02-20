@@ -1,3 +1,7 @@
+# To set up database (from Jonathan):
+
+After having prismatopia set up, run `make local-prisma-deploy` to generate database
+
 # Prismatopia
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/4774191eaf12577db1e2/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/adaptivapps-2-be/maintainability)

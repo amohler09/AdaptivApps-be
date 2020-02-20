@@ -1,6 +1,5 @@
-# import Query.user from "generated/prisma.graphql"
-# import Query.users from "generated/prisma.graphql"
-
-# import Mutation.createUser from "generated/prisma.graphql"
-
-
+# import Query.profile from "generated/prisma.graphql"
+# import Query.profiles from "generated/prisma.graphql"
+# import Mutation.createProfile from "generated/prisma.graphql"
+# import Mutation.updateProfile from "generated/prisma.graphql"
+# import Mutation.deleteProfile from "generated/prisma.graphql"
