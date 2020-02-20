@@ -24,12 +24,12 @@ const profile = async (_, args, context) => {
  * @returns { Promise }
  */
 const profiles = async (_, args, context) => {
-  console.log("Query.profile.args: %j", args)
+  console.log("Query.profiles.args should be empty: %j", args)
 
   const profile = await context.prisma.profiles(args);
-
-  console.log("Query.user: %j", profile)
-  
+  const user = await context.user;
+  console.log("Query.profiles: %j", profile)
+  console.log("The user is", user)
   return profile;
 };
 

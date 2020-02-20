@@ -1,6 +1,6 @@
 type Profile @key(fields: "email"){
   id: ID! @id
-  email: String!
+  email: String! @unique
   firstName: String
   lastName: String
   displayName: String
