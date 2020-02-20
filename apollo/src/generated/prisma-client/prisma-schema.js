@@ -3,7 +3,7 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateUser {
+/* GraphQL */ `type AggregateProfile {
   count: Int!
 }
 
@@ -16,12 +16,12 @@ scalar DateTime
 scalar Long
 
 type Mutation {
-  createUser(data: UserCreateInput!): User!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createProfile(data: ProfileCreateInput!): Profile!
+  updateProfile(data: ProfileUpdateInput!, where: ProfileWhereUniqueInput!): Profile
+  updateManyProfiles(data: ProfileUpdateManyMutationInput!, where: ProfileWhereInput): BatchPayload!
+  upsertProfile(where: ProfileWhereUniqueInput!, create: ProfileCreateInput!, update: ProfileUpdateInput!): Profile!
+  deleteProfile(where: ProfileWhereUniqueInput!): Profile
+  deleteManyProfiles(where: ProfileWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -41,18 +41,7 @@ type PageInfo {
   endCursor: String
 }
 
-type Query {
-  user(where: UserWhereUniqueInput!): User
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  node(id: ID!): Node
-}
-
-type Subscription {
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-}
-
-type User {
+type Profile {
   id: ID!
   email: String!
   firstName: String
@@ -66,13 +55,13 @@ type User {
   updatedAt: DateTime!
 }
 
-type UserConnection {
+type ProfileConnection {
   pageInfo: PageInfo!
-  edges: [UserEdge]!
-  aggregate: AggregateUser!
+  edges: [ProfileEdge]!
+  aggregate: AggregateProfile!
 }
 
-input UserCreateInput {
+input ProfileCreateInput {
   id: ID
   email: String!
   firstName: String
@@ -84,12 +73,12 @@ input UserCreateInput {
   legal: Boolean
 }
 
-type UserEdge {
-  node: User!
+type ProfileEdge {
+  node: Profile!
   cursor: String!
 }
 
-enum UserOrderByInput {
+enum ProfileOrderByInput {
   id_ASC
   id_DESC
   email_ASC
@@ -114,7 +103,7 @@ enum UserOrderByInput {
   updatedAt_DESC
 }
 
-type UserPreviousValues {
+type ProfilePreviousValues {
   id: ID!
   email: String!
   firstName: String
@@ -128,25 +117,25 @@ type UserPreviousValues {
   updatedAt: DateTime!
 }
 
-type UserSubscriptionPayload {
+type ProfileSubscriptionPayload {
   mutation: MutationType!
-  node: User
+  node: Profile
   updatedFields: [String!]
-  previousValues: UserPreviousValues
+  previousValues: ProfilePreviousValues
 }
 
-input UserSubscriptionWhereInput {
+input ProfileSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: UserWhereInput
-  AND: [UserSubscriptionWhereInput!]
-  OR: [UserSubscriptionWhereInput!]
-  NOT: [UserSubscriptionWhereInput!]
+  node: ProfileWhereInput
+  AND: [ProfileSubscriptionWhereInput!]
+  OR: [ProfileSubscriptionWhereInput!]
+  NOT: [ProfileSubscriptionWhereInput!]
 }
 
-input UserUpdateInput {
+input ProfileUpdateInput {
   email: String
   firstName: String
   lastName: String
@@ -157,7 +146,7 @@ input UserUpdateInput {
   legal: Boolean
 }
 
-input UserUpdateManyMutationInput {
+input ProfileUpdateManyMutationInput {
   email: String
   firstName: String
   lastName: String
@@ -168,7 +157,7 @@ input UserUpdateManyMutationInput {
   legal: Boolean
 }
 
-input UserWhereInput {
+input ProfileWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -299,13 +288,24 @@ input UserWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
+  AND: [ProfileWhereInput!]
+  OR: [ProfileWhereInput!]
+  NOT: [ProfileWhereInput!]
 }
 
-input UserWhereUniqueInput {
+input ProfileWhereUniqueInput {
   id: ID
+}
+
+type Query {
+  profile(where: ProfileWhereUniqueInput!): Profile
+  profiles(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Profile]!
+  profilesConnection(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProfileConnection!
+  node(id: ID!): Node
+}
+
+type Subscription {
+  profile(where: ProfileSubscriptionWhereInput): ProfileSubscriptionPayload
 }
 `
       }

@@ -16,7 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  user: (where?: UserWhereInput) => Promise<boolean>;
+  profile: (where?: ProfileWhereInput) => Promise<boolean>;
 }
 
 export interface Node {}
@@ -38,47 +38,47 @@ export interface Prisma {
    * Queries
    */
 
-  user: (where: UserWhereUniqueInput) => UserNullablePromise;
-  users: (args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
+  profile: (where: ProfileWhereUniqueInput) => ProfileNullablePromise;
+  profiles: (args?: {
+    where?: ProfileWhereInput;
+    orderBy?: ProfileOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<User>;
-  usersConnection: (args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
+  }) => FragmentableArray<Profile>;
+  profilesConnection: (args?: {
+    where?: ProfileWhereInput;
+    orderBy?: ProfileOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => UserConnectionPromise;
+  }) => ProfileConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
    * Mutations
    */
 
-  createUser: (data: UserCreateInput) => UserPromise;
-  updateUser: (args: {
-    data: UserUpdateInput;
-    where: UserWhereUniqueInput;
-  }) => UserPromise;
-  updateManyUsers: (args: {
-    data: UserUpdateManyMutationInput;
-    where?: UserWhereInput;
+  createProfile: (data: ProfileCreateInput) => ProfilePromise;
+  updateProfile: (args: {
+    data: ProfileUpdateInput;
+    where: ProfileWhereUniqueInput;
+  }) => ProfilePromise;
+  updateManyProfiles: (args: {
+    data: ProfileUpdateManyMutationInput;
+    where?: ProfileWhereInput;
   }) => BatchPayloadPromise;
-  upsertUser: (args: {
-    where: UserWhereUniqueInput;
-    create: UserCreateInput;
-    update: UserUpdateInput;
-  }) => UserPromise;
-  deleteUser: (where: UserWhereUniqueInput) => UserPromise;
-  deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
+  upsertProfile: (args: {
+    where: ProfileWhereUniqueInput;
+    create: ProfileCreateInput;
+    update: ProfileUpdateInput;
+  }) => ProfilePromise;
+  deleteProfile: (where: ProfileWhereUniqueInput) => ProfilePromise;
+  deleteManyProfiles: (where?: ProfileWhereInput) => BatchPayloadPromise;
 
   /**
    * Subscriptions
@@ -88,9 +88,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  user: (
-    where?: UserSubscriptionWhereInput
-  ) => UserSubscriptionPayloadSubscription;
+  profile: (
+    where?: ProfileSubscriptionWhereInput
+  ) => ProfileSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -101,7 +101,7 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type UserOrderByInput =
+export type ProfileOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "email_ASC"
@@ -127,11 +127,11 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type UserWhereUniqueInput = AtLeastOne<{
+export type ProfileWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface UserWhereInput {
+export interface ProfileWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -262,12 +262,12 @@ export interface UserWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
-  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
-  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
+  AND?: Maybe<ProfileWhereInput[] | ProfileWhereInput>;
+  OR?: Maybe<ProfileWhereInput[] | ProfileWhereInput>;
+  NOT?: Maybe<ProfileWhereInput[] | ProfileWhereInput>;
 }
 
-export interface UserCreateInput {
+export interface ProfileCreateInput {
   id?: Maybe<ID_Input>;
   email: String;
   firstName?: Maybe<String>;
@@ -279,7 +279,7 @@ export interface UserCreateInput {
   legal?: Maybe<Boolean>;
 }
 
-export interface UserUpdateInput {
+export interface ProfileUpdateInput {
   email?: Maybe<String>;
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
@@ -290,7 +290,7 @@ export interface UserUpdateInput {
   legal?: Maybe<Boolean>;
 }
 
-export interface UserUpdateManyMutationInput {
+export interface ProfileUpdateManyMutationInput {
   email?: Maybe<String>;
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
@@ -301,22 +301,22 @@ export interface UserUpdateManyMutationInput {
   legal?: Maybe<Boolean>;
 }
 
-export interface UserSubscriptionWhereInput {
+export interface ProfileSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  node?: Maybe<ProfileWhereInput>;
+  AND?: Maybe<ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput>;
+  OR?: Maybe<ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput>;
+  NOT?: Maybe<ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput>;
 }
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface User {
+export interface Profile {
   id: ID_Output;
   email: String;
   firstName?: String;
@@ -330,7 +330,7 @@ export interface User {
   updatedAt: DateTimeOutput;
 }
 
-export interface UserPromise extends Promise<User>, Fragmentable {
+export interface ProfilePromise extends Promise<Profile>, Fragmentable {
   id: () => Promise<ID_Output>;
   email: () => Promise<String>;
   firstName: () => Promise<String>;
@@ -344,8 +344,8 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
+export interface ProfileSubscription
+  extends Promise<AsyncIterator<Profile>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   email: () => Promise<AsyncIterator<String>>;
@@ -360,8 +360,8 @@ export interface UserSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface UserNullablePromise
-  extends Promise<User | null>,
+export interface ProfileNullablePromise
+  extends Promise<Profile | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   email: () => Promise<String>;
@@ -376,25 +376,25 @@ export interface UserNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface UserConnection {
+export interface ProfileConnection {
   pageInfo: PageInfo;
-  edges: UserEdge[];
+  edges: ProfileEdge[];
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface ProfileConnectionPromise
+  extends Promise<ProfileConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  edges: <T = FragmentableArray<ProfileEdge>>() => T;
+  aggregate: <T = AggregateProfilePromise>() => T;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface ProfileConnectionSubscription
+  extends Promise<AsyncIterator<ProfileConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ProfileEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateProfileSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -420,35 +420,35 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserEdge {
-  node: User;
+export interface ProfileEdge {
+  node: Profile;
   cursor: String;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
+export interface ProfileEdgePromise extends Promise<ProfileEdge>, Fragmentable {
+  node: <T = ProfilePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface ProfileEdgeSubscription
+  extends Promise<AsyncIterator<ProfileEdge>>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
+  node: <T = ProfileSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateUser {
+export interface AggregateProfile {
   count: Int;
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface AggregateProfilePromise
+  extends Promise<AggregateProfile>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface AggregateProfileSubscription
+  extends Promise<AsyncIterator<AggregateProfile>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -469,32 +469,32 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface UserSubscriptionPayload {
+export interface ProfileSubscriptionPayload {
   mutation: MutationType;
-  node: User;
+  node: Profile;
   updatedFields: String[];
-  previousValues: UserPreviousValues;
+  previousValues: ProfilePreviousValues;
 }
 
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
+export interface ProfileSubscriptionPayloadPromise
+  extends Promise<ProfileSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
+  node: <T = ProfilePromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
+  previousValues: <T = ProfilePreviousValuesPromise>() => T;
 }
 
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+export interface ProfileSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ProfileSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
+  node: <T = ProfileSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
+  previousValues: <T = ProfilePreviousValuesSubscription>() => T;
 }
 
-export interface UserPreviousValues {
+export interface ProfilePreviousValues {
   id: ID_Output;
   email: String;
   firstName?: String;
@@ -508,8 +508,8 @@ export interface UserPreviousValues {
   updatedAt: DateTimeOutput;
 }
 
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
+export interface ProfilePreviousValuesPromise
+  extends Promise<ProfilePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   email: () => Promise<String>;
@@ -524,8 +524,8 @@ export interface UserPreviousValuesPromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
+export interface ProfilePreviousValuesSubscription
+  extends Promise<AsyncIterator<ProfilePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   email: () => Promise<AsyncIterator<String>>;
@@ -579,7 +579,7 @@ export type Long = string;
 
 export const models: Model[] = [
   {
-    name: "User",
+    name: "Profile",
     embedded: false
   }
 ];

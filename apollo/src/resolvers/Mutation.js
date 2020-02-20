@@ -1,18 +1,18 @@
 // @ts-check
 
 /**
- * @param {{ data: import('../generated/prisma-client').UserCreateInput }} args
+ * @param {{ data: import('../generated/prisma-client').ProfileCreateInput }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
- * @returns { import('../generated/prisma-client').UserPromise }
+ * @returns { import('../generated/prisma-client').ProfilePromise }
  */
-const createUser = (_, args, context) => {
-  console.log("createUser.args: %j", args)
+const createProfile = (_, args, context) => {
+  console.log("createProfile.args: %j", args)
 
-  const user = context.prisma.createUser(args.data);  
+  const profile = context.prisma.createProfile(args.data);  
 
-  return user;
+  return profile;
 };
 
 module.exports = {
-  createUser,
+  createProfile,
 };

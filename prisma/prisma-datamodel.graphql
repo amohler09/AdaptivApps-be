@@ -1,4 +1,4 @@
-type User @key(fields: "email"){
+type Profile @key(fields: "email"){
   id: ID! @id
   email: String!
   firstName: String
