@@ -16,7 +16,6 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  profile: (where?: ProfileWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -39,25 +38,6 @@ export interface Prisma {
    * Queries
    */
 
-  profile: (where: ProfileWhereUniqueInput) => ProfileNullablePromise;
-  profiles: (args?: {
-    where?: ProfileWhereInput;
-    orderBy?: ProfileOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<Profile>;
-  profilesConnection: (args?: {
-    where?: ProfileWhereInput;
-    orderBy?: ProfileOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => ProfileConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -83,27 +63,15 @@ export interface Prisma {
    * Mutations
    */
 
-  createProfile: (data: ProfileCreateInput) => ProfilePromise;
-  updateProfile: (args: {
-    data: ProfileUpdateInput;
-    where: ProfileWhereUniqueInput;
-  }) => ProfilePromise;
-  updateManyProfiles: (args: {
-    data: ProfileUpdateManyMutationInput;
-    where?: ProfileWhereInput;
-  }) => BatchPayloadPromise;
-  upsertProfile: (args: {
-    where: ProfileWhereUniqueInput;
-    create: ProfileCreateInput;
-    update: ProfileUpdateInput;
-  }) => ProfilePromise;
-  deleteProfile: (where: ProfileWhereUniqueInput) => ProfilePromise;
-  deleteManyProfiles: (where?: ProfileWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
     where: UserWhereUniqueInput;
   }) => UserPromise;
+  updateManyUsers: (args: {
+    data: UserUpdateManyMutationInput;
+    where?: UserWhereInput;
+  }) => BatchPayloadPromise;
   upsertUser: (args: {
     where: UserWhereUniqueInput;
     create: UserCreateInput;
@@ -120,9 +88,6 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  profile: (
-    where?: ProfileSubscriptionWhereInput
-  ) => ProfileSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -136,69 +101,31 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type ProfileOrderByInput =
+export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "favorite_color_ASC"
-  | "favorite_color_DESC"
-  | "favorite_shape_ASC"
-  | "favorite_shape_DESC";
-
-export type UserOrderByInput = "id_ASC" | "id_DESC";
+  | "email_ASC"
+  | "email_DESC"
+  | "firstName_ASC"
+  | "firstName_DESC"
+  | "lastName_ASC"
+  | "lastName_DESC"
+  | "displayName_ASC"
+  | "displayName_DESC"
+  | "birthday_ASC"
+  | "birthday_DESC"
+  | "bio_ASC"
+  | "bio_DESC"
+  | "disability_ASC"
+  | "disability_DESC"
+  | "legal_ASC"
+  | "legal_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
-
-export type ProfileWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface ProfileWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  favorite_color?: Maybe<String>;
-  favorite_color_not?: Maybe<String>;
-  favorite_color_in?: Maybe<String[] | String>;
-  favorite_color_not_in?: Maybe<String[] | String>;
-  favorite_color_lt?: Maybe<String>;
-  favorite_color_lte?: Maybe<String>;
-  favorite_color_gt?: Maybe<String>;
-  favorite_color_gte?: Maybe<String>;
-  favorite_color_contains?: Maybe<String>;
-  favorite_color_not_contains?: Maybe<String>;
-  favorite_color_starts_with?: Maybe<String>;
-  favorite_color_not_starts_with?: Maybe<String>;
-  favorite_color_ends_with?: Maybe<String>;
-  favorite_color_not_ends_with?: Maybe<String>;
-  favorite_shape?: Maybe<String>;
-  favorite_shape_not?: Maybe<String>;
-  favorite_shape_in?: Maybe<String[] | String>;
-  favorite_shape_not_in?: Maybe<String[] | String>;
-  favorite_shape_lt?: Maybe<String>;
-  favorite_shape_lte?: Maybe<String>;
-  favorite_shape_gt?: Maybe<String>;
-  favorite_shape_gte?: Maybe<String>;
-  favorite_shape_contains?: Maybe<String>;
-  favorite_shape_not_contains?: Maybe<String>;
-  favorite_shape_starts_with?: Maybe<String>;
-  favorite_shape_not_starts_with?: Maybe<String>;
-  favorite_shape_ends_with?: Maybe<String>;
-  favorite_shape_not_ends_with?: Maybe<String>;
-  AND?: Maybe<ProfileWhereInput[] | ProfileWhereInput>;
-  OR?: Maybe<ProfileWhereInput[] | ProfileWhereInput>;
-  NOT?: Maybe<ProfileWhereInput[] | ProfileWhereInput>;
-}
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
@@ -219,70 +146,159 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  profile?: Maybe<ProfileWhereInput>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  firstName?: Maybe<String>;
+  firstName_not?: Maybe<String>;
+  firstName_in?: Maybe<String[] | String>;
+  firstName_not_in?: Maybe<String[] | String>;
+  firstName_lt?: Maybe<String>;
+  firstName_lte?: Maybe<String>;
+  firstName_gt?: Maybe<String>;
+  firstName_gte?: Maybe<String>;
+  firstName_contains?: Maybe<String>;
+  firstName_not_contains?: Maybe<String>;
+  firstName_starts_with?: Maybe<String>;
+  firstName_not_starts_with?: Maybe<String>;
+  firstName_ends_with?: Maybe<String>;
+  firstName_not_ends_with?: Maybe<String>;
+  lastName?: Maybe<String>;
+  lastName_not?: Maybe<String>;
+  lastName_in?: Maybe<String[] | String>;
+  lastName_not_in?: Maybe<String[] | String>;
+  lastName_lt?: Maybe<String>;
+  lastName_lte?: Maybe<String>;
+  lastName_gt?: Maybe<String>;
+  lastName_gte?: Maybe<String>;
+  lastName_contains?: Maybe<String>;
+  lastName_not_contains?: Maybe<String>;
+  lastName_starts_with?: Maybe<String>;
+  lastName_not_starts_with?: Maybe<String>;
+  lastName_ends_with?: Maybe<String>;
+  lastName_not_ends_with?: Maybe<String>;
+  displayName?: Maybe<String>;
+  displayName_not?: Maybe<String>;
+  displayName_in?: Maybe<String[] | String>;
+  displayName_not_in?: Maybe<String[] | String>;
+  displayName_lt?: Maybe<String>;
+  displayName_lte?: Maybe<String>;
+  displayName_gt?: Maybe<String>;
+  displayName_gte?: Maybe<String>;
+  displayName_contains?: Maybe<String>;
+  displayName_not_contains?: Maybe<String>;
+  displayName_starts_with?: Maybe<String>;
+  displayName_not_starts_with?: Maybe<String>;
+  displayName_ends_with?: Maybe<String>;
+  displayName_not_ends_with?: Maybe<String>;
+  birthday?: Maybe<String>;
+  birthday_not?: Maybe<String>;
+  birthday_in?: Maybe<String[] | String>;
+  birthday_not_in?: Maybe<String[] | String>;
+  birthday_lt?: Maybe<String>;
+  birthday_lte?: Maybe<String>;
+  birthday_gt?: Maybe<String>;
+  birthday_gte?: Maybe<String>;
+  birthday_contains?: Maybe<String>;
+  birthday_not_contains?: Maybe<String>;
+  birthday_starts_with?: Maybe<String>;
+  birthday_not_starts_with?: Maybe<String>;
+  birthday_ends_with?: Maybe<String>;
+  birthday_not_ends_with?: Maybe<String>;
+  bio?: Maybe<String>;
+  bio_not?: Maybe<String>;
+  bio_in?: Maybe<String[] | String>;
+  bio_not_in?: Maybe<String[] | String>;
+  bio_lt?: Maybe<String>;
+  bio_lte?: Maybe<String>;
+  bio_gt?: Maybe<String>;
+  bio_gte?: Maybe<String>;
+  bio_contains?: Maybe<String>;
+  bio_not_contains?: Maybe<String>;
+  bio_starts_with?: Maybe<String>;
+  bio_not_starts_with?: Maybe<String>;
+  bio_ends_with?: Maybe<String>;
+  bio_not_ends_with?: Maybe<String>;
+  disability?: Maybe<String>;
+  disability_not?: Maybe<String>;
+  disability_in?: Maybe<String[] | String>;
+  disability_not_in?: Maybe<String[] | String>;
+  disability_lt?: Maybe<String>;
+  disability_lte?: Maybe<String>;
+  disability_gt?: Maybe<String>;
+  disability_gte?: Maybe<String>;
+  disability_contains?: Maybe<String>;
+  disability_not_contains?: Maybe<String>;
+  disability_starts_with?: Maybe<String>;
+  disability_not_starts_with?: Maybe<String>;
+  disability_ends_with?: Maybe<String>;
+  disability_not_ends_with?: Maybe<String>;
+  legal?: Maybe<Boolean>;
+  legal_not?: Maybe<Boolean>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export interface ProfileCreateInput {
-  id?: Maybe<ID_Input>;
-  favorite_color?: Maybe<String>;
-  favorite_shape?: Maybe<String>;
-}
-
-export interface ProfileUpdateInput {
-  favorite_color?: Maybe<String>;
-  favorite_shape?: Maybe<String>;
-}
-
-export interface ProfileUpdateManyMutationInput {
-  favorite_color?: Maybe<String>;
-  favorite_shape?: Maybe<String>;
-}
-
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
-  profile?: Maybe<ProfileCreateOneInput>;
-}
-
-export interface ProfileCreateOneInput {
-  create?: Maybe<ProfileCreateInput>;
-  connect?: Maybe<ProfileWhereUniqueInput>;
+  email: String;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  displayName?: Maybe<String>;
+  birthday?: Maybe<String>;
+  bio?: Maybe<String>;
+  disability?: Maybe<String>;
+  legal?: Maybe<Boolean>;
 }
 
 export interface UserUpdateInput {
-  profile?: Maybe<ProfileUpdateOneInput>;
+  email?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  displayName?: Maybe<String>;
+  birthday?: Maybe<String>;
+  bio?: Maybe<String>;
+  disability?: Maybe<String>;
+  legal?: Maybe<Boolean>;
 }
 
-export interface ProfileUpdateOneInput {
-  create?: Maybe<ProfileCreateInput>;
-  update?: Maybe<ProfileUpdateDataInput>;
-  upsert?: Maybe<ProfileUpsertNestedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<ProfileWhereUniqueInput>;
-}
-
-export interface ProfileUpdateDataInput {
-  favorite_color?: Maybe<String>;
-  favorite_shape?: Maybe<String>;
-}
-
-export interface ProfileUpsertNestedInput {
-  update: ProfileUpdateDataInput;
-  create: ProfileCreateInput;
-}
-
-export interface ProfileSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ProfileWhereInput>;
-  AND?: Maybe<ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput>;
-  OR?: Maybe<ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput>;
-  NOT?: Maybe<ProfileSubscriptionWhereInput[] | ProfileSubscriptionWhereInput>;
+export interface UserUpdateManyMutationInput {
+  email?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  displayName?: Maybe<String>;
+  birthday?: Maybe<String>;
+  bio?: Maybe<String>;
+  disability?: Maybe<String>;
+  legal?: Maybe<Boolean>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -300,53 +316,85 @@ export interface NodeNode {
   id: ID_Output;
 }
 
-export interface Profile {
+export interface User {
   id: ID_Output;
-  favorite_color?: String;
-  favorite_shape?: String;
+  email: String;
+  firstName?: String;
+  lastName?: String;
+  displayName?: String;
+  birthday?: String;
+  bio?: String;
+  disability?: String;
+  legal?: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
-export interface ProfilePromise extends Promise<Profile>, Fragmentable {
+export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
-  favorite_color: () => Promise<String>;
-  favorite_shape: () => Promise<String>;
+  email: () => Promise<String>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  displayName: () => Promise<String>;
+  birthday: () => Promise<String>;
+  bio: () => Promise<String>;
+  disability: () => Promise<String>;
+  legal: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface ProfileSubscription
-  extends Promise<AsyncIterator<Profile>>,
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  favorite_color: () => Promise<AsyncIterator<String>>;
-  favorite_shape: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  displayName: () => Promise<AsyncIterator<String>>;
+  birthday: () => Promise<AsyncIterator<String>>;
+  bio: () => Promise<AsyncIterator<String>>;
+  disability: () => Promise<AsyncIterator<String>>;
+  legal: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface ProfileNullablePromise
-  extends Promise<Profile | null>,
+export interface UserNullablePromise
+  extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  favorite_color: () => Promise<String>;
-  favorite_shape: () => Promise<String>;
+  email: () => Promise<String>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  displayName: () => Promise<String>;
+  birthday: () => Promise<String>;
+  bio: () => Promise<String>;
+  disability: () => Promise<String>;
+  legal: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface ProfileConnection {
+export interface UserConnection {
   pageInfo: PageInfo;
-  edges: ProfileEdge[];
+  edges: UserEdge[];
 }
 
-export interface ProfileConnectionPromise
-  extends Promise<ProfileConnection>,
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ProfileEdge>>() => T;
-  aggregate: <T = AggregateProfilePromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
 }
 
-export interface ProfileConnectionSubscription
-  extends Promise<AsyncIterator<ProfileConnection>>,
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ProfileEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateProfileSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -370,83 +418,6 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ProfileEdge {
-  node: Profile;
-  cursor: String;
-}
-
-export interface ProfileEdgePromise extends Promise<ProfileEdge>, Fragmentable {
-  node: <T = ProfilePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ProfileEdgeSubscription
-  extends Promise<AsyncIterator<ProfileEdge>>,
-    Fragmentable {
-  node: <T = ProfileSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateProfile {
-  count: Int;
-}
-
-export interface AggregateProfilePromise
-  extends Promise<AggregateProfile>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateProfileSubscription
-  extends Promise<AsyncIterator<AggregateProfile>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface User {
-  id: ID_Output;
-}
-
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  profile: <T = ProfilePromise>() => T;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  profile: <T = ProfileSubscription>() => T;
-}
-
-export interface UserNullablePromise
-  extends Promise<User | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  profile: <T = ProfilePromise>() => T;
-}
-
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
-}
-
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface UserEdge {
@@ -498,53 +469,6 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface ProfileSubscriptionPayload {
-  mutation: MutationType;
-  node: Profile;
-  updatedFields: String[];
-  previousValues: ProfilePreviousValues;
-}
-
-export interface ProfileSubscriptionPayloadPromise
-  extends Promise<ProfileSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ProfilePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ProfilePreviousValuesPromise>() => T;
-}
-
-export interface ProfileSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ProfileSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ProfileSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ProfilePreviousValuesSubscription>() => T;
-}
-
-export interface ProfilePreviousValues {
-  id: ID_Output;
-  favorite_color?: String;
-  favorite_shape?: String;
-}
-
-export interface ProfilePreviousValuesPromise
-  extends Promise<ProfilePreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  favorite_color: () => Promise<String>;
-  favorite_shape: () => Promise<String>;
-}
-
-export interface ProfilePreviousValuesSubscription
-  extends Promise<AsyncIterator<ProfilePreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  favorite_color: () => Promise<AsyncIterator<String>>;
-  favorite_shape: () => Promise<AsyncIterator<String>>;
-}
-
 export interface UserSubscriptionPayload {
   mutation: MutationType;
   node: User;
@@ -572,18 +496,48 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface UserPreviousValues {
   id: ID_Output;
+  email: String;
+  firstName?: String;
+  lastName?: String;
+  displayName?: String;
+  birthday?: String;
+  bio?: String;
+  disability?: String;
+  legal?: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  displayName: () => Promise<String>;
+  birthday: () => Promise<String>;
+  bio: () => Promise<String>;
+  disability: () => Promise<String>;
+  legal: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  email: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  displayName: () => Promise<AsyncIterator<String>>;
+  birthday: () => Promise<AsyncIterator<String>>;
+  bio: () => Promise<AsyncIterator<String>>;
+  disability: () => Promise<AsyncIterator<String>>;
+  legal: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 /*
@@ -598,14 +552,24 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
-
-/*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
+
+/*
+DateTime scalar input type, allowing Date
+*/
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
 
 export type Long = string;
 
@@ -616,10 +580,6 @@ export type Long = string;
 export const models: Model[] = [
   {
     name: "User",
-    embedded: false
-  },
-  {
-    name: "Profile",
     embedded: false
   }
 ];

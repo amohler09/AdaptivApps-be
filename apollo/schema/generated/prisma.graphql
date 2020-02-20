@@ -1,7 +1,3 @@
-type AggregateProfile {
-  count: Int!
-}
-
 type AggregateUser {
   count: Int!
 }
@@ -10,17 +6,14 @@ type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
 scalar Long
 
 type Mutation {
-  createProfile(data: ProfileCreateInput!): Profile!
-  updateProfile(data: ProfileUpdateInput!, where: ProfileWhereUniqueInput!): Profile
-  updateManyProfiles(data: ProfileUpdateManyMutationInput!, where: ProfileWhereInput): BatchPayload!
-  upsertProfile(where: ProfileWhereUniqueInput!, create: ProfileCreateInput!, update: ProfileUpdateInput!): Profile!
-  deleteProfile(where: ProfileWhereUniqueInput!): Profile
-  deleteManyProfiles(where: ProfileWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
@@ -43,152 +36,7 @@ type PageInfo {
   endCursor: String
 }
 
-type Profile {
-  id: ID!
-  favorite_color: String
-  favorite_shape: String
-}
-
-type ProfileConnection {
-  pageInfo: PageInfo!
-  edges: [ProfileEdge]!
-  aggregate: AggregateProfile!
-}
-
-input ProfileCreateInput {
-  id: ID
-  favorite_color: String
-  favorite_shape: String
-}
-
-input ProfileCreateOneInput {
-  create: ProfileCreateInput
-  connect: ProfileWhereUniqueInput
-}
-
-type ProfileEdge {
-  node: Profile!
-  cursor: String!
-}
-
-enum ProfileOrderByInput {
-  id_ASC
-  id_DESC
-  favorite_color_ASC
-  favorite_color_DESC
-  favorite_shape_ASC
-  favorite_shape_DESC
-}
-
-type ProfilePreviousValues {
-  id: ID!
-  favorite_color: String
-  favorite_shape: String
-}
-
-type ProfileSubscriptionPayload {
-  mutation: MutationType!
-  node: Profile
-  updatedFields: [String!]
-  previousValues: ProfilePreviousValues
-}
-
-input ProfileSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: ProfileWhereInput
-  AND: [ProfileSubscriptionWhereInput!]
-  OR: [ProfileSubscriptionWhereInput!]
-  NOT: [ProfileSubscriptionWhereInput!]
-}
-
-input ProfileUpdateDataInput {
-  favorite_color: String
-  favorite_shape: String
-}
-
-input ProfileUpdateInput {
-  favorite_color: String
-  favorite_shape: String
-}
-
-input ProfileUpdateManyMutationInput {
-  favorite_color: String
-  favorite_shape: String
-}
-
-input ProfileUpdateOneInput {
-  create: ProfileCreateInput
-  update: ProfileUpdateDataInput
-  upsert: ProfileUpsertNestedInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: ProfileWhereUniqueInput
-}
-
-input ProfileUpsertNestedInput {
-  update: ProfileUpdateDataInput!
-  create: ProfileCreateInput!
-}
-
-input ProfileWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  favorite_color: String
-  favorite_color_not: String
-  favorite_color_in: [String!]
-  favorite_color_not_in: [String!]
-  favorite_color_lt: String
-  favorite_color_lte: String
-  favorite_color_gt: String
-  favorite_color_gte: String
-  favorite_color_contains: String
-  favorite_color_not_contains: String
-  favorite_color_starts_with: String
-  favorite_color_not_starts_with: String
-  favorite_color_ends_with: String
-  favorite_color_not_ends_with: String
-  favorite_shape: String
-  favorite_shape_not: String
-  favorite_shape_in: [String!]
-  favorite_shape_not_in: [String!]
-  favorite_shape_lt: String
-  favorite_shape_lte: String
-  favorite_shape_gt: String
-  favorite_shape_gte: String
-  favorite_shape_contains: String
-  favorite_shape_not_contains: String
-  favorite_shape_starts_with: String
-  favorite_shape_not_starts_with: String
-  favorite_shape_ends_with: String
-  favorite_shape_not_ends_with: String
-  AND: [ProfileWhereInput!]
-  OR: [ProfileWhereInput!]
-  NOT: [ProfileWhereInput!]
-}
-
-input ProfileWhereUniqueInput {
-  id: ID
-}
-
 type Query {
-  profile(where: ProfileWhereUniqueInput!): Profile
-  profiles(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Profile]!
-  profilesConnection(where: ProfileWhereInput, orderBy: ProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProfileConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -196,13 +44,21 @@ type Query {
 }
 
 type Subscription {
-  profile(where: ProfileSubscriptionWhereInput): ProfileSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type User {
   id: ID!
-  profile: Profile
+  email: String!
+  firstName: String
+  lastName: String
+  displayName: String
+  birthday: String
+  bio: String
+  disability: String
+  legal: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type UserConnection {
@@ -213,7 +69,14 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
-  profile: ProfileCreateOneInput
+  email: String!
+  firstName: String
+  lastName: String
+  displayName: String
+  birthday: String
+  bio: String
+  disability: String
+  legal: Boolean
 }
 
 type UserEdge {
@@ -224,10 +87,40 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
+  email_ASC
+  email_DESC
+  firstName_ASC
+  firstName_DESC
+  lastName_ASC
+  lastName_DESC
+  displayName_ASC
+  displayName_DESC
+  birthday_ASC
+  birthday_DESC
+  bio_ASC
+  bio_DESC
+  disability_ASC
+  disability_DESC
+  legal_ASC
+  legal_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type UserPreviousValues {
   id: ID!
+  email: String!
+  firstName: String
+  lastName: String
+  displayName: String
+  birthday: String
+  bio: String
+  disability: String
+  legal: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type UserSubscriptionPayload {
@@ -249,7 +142,25 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
-  profile: ProfileUpdateOneInput
+  email: String
+  firstName: String
+  lastName: String
+  displayName: String
+  birthday: String
+  bio: String
+  disability: String
+  legal: Boolean
+}
+
+input UserUpdateManyMutationInput {
+  email: String
+  firstName: String
+  lastName: String
+  displayName: String
+  birthday: String
+  bio: String
+  disability: String
+  legal: Boolean
 }
 
 input UserWhereInput {
@@ -267,7 +178,122 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  profile: ProfileWhereInput
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  displayName: String
+  displayName_not: String
+  displayName_in: [String!]
+  displayName_not_in: [String!]
+  displayName_lt: String
+  displayName_lte: String
+  displayName_gt: String
+  displayName_gte: String
+  displayName_contains: String
+  displayName_not_contains: String
+  displayName_starts_with: String
+  displayName_not_starts_with: String
+  displayName_ends_with: String
+  displayName_not_ends_with: String
+  birthday: String
+  birthday_not: String
+  birthday_in: [String!]
+  birthday_not_in: [String!]
+  birthday_lt: String
+  birthday_lte: String
+  birthday_gt: String
+  birthday_gte: String
+  birthday_contains: String
+  birthday_not_contains: String
+  birthday_starts_with: String
+  birthday_not_starts_with: String
+  birthday_ends_with: String
+  birthday_not_ends_with: String
+  bio: String
+  bio_not: String
+  bio_in: [String!]
+  bio_not_in: [String!]
+  bio_lt: String
+  bio_lte: String
+  bio_gt: String
+  bio_gte: String
+  bio_contains: String
+  bio_not_contains: String
+  bio_starts_with: String
+  bio_not_starts_with: String
+  bio_ends_with: String
+  bio_not_ends_with: String
+  disability: String
+  disability_not: String
+  disability_in: [String!]
+  disability_not_in: [String!]
+  disability_lt: String
+  disability_lte: String
+  disability_gt: String
+  disability_gte: String
+  disability_contains: String
+  disability_not_contains: String
+  disability_starts_with: String
+  disability_not_starts_with: String
+  disability_ends_with: String
+  disability_not_ends_with: String
+  legal: Boolean
+  legal_not: Boolean
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
