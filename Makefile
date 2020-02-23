@@ -118,11 +118,10 @@ apollo-token:
 	 printf "%s\n"   "= Grabbing token from: $${OAUTH_TOKEN_ENDPOINT}"																					&& \
 	 printf "%s\n"   "======================================================================================"		&& \
 	 printf "$(NO_COLOR)"																																												&& \
-	 curl --request POST 																																													 \
-		    --url $${OAUTH_TOKEN_ENDPOINT}/v1/token 																																 \
-		    --header 'content-type: application/x-www-form-urlencoded' 																							 \
-		    --data 'grant_type=client_credentials&scope=groups'																											 \
-				-u $${TEST_OAUTH_CLIENT_ID}:$${TEST_OAUTH_CLIENT_SECRET}
+	 curl --request POST \
+  --url https://dev-sxhevmag.auth0.com/oauth/token \
+  --header 'content-type: application/json' \
+  --data '{"client_id":"asVyDNwKxm5ysKPmQ0cwhzLzT3WShqO0","client_secret":"y65jNsxSjmTTuStYf9IqmaJN0TJsPGFYUmL8R6xNA583EyihD_HmqasT5IEzNqMW","audience":"https://dev-sxhevmag.auth0.com/api/v2/","grant_type":"client_credentials"}'
 
 
 # =================================================================
