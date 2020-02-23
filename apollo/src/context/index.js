@@ -1,12 +1,19 @@
 const { prisma } = require('../generated/prisma-client');
-const decodeToken = require('../auth');
+// const decodeToken = require('../auth');
 
 // Create context object to pass request, user and prisma client
 // into all resolvers. Throws error if requests are not authenticated.
 const context = async ({ req }) => {
-  const { authorization } = req.headers;
-  if (authorization) {
-    const user = await decodeToken(authorization);
+  const token = req.headers.authorization;
+  if (token) {
+    const user = new Promise((resolve, reject) => {
+      jwt.verify(token, getKey, options, (err, decoded) => {
+        if(err) {
+          return reject(err);
+        }
+        resolve(decoded.email);
+      });
+    });
     return { ...req, user, prisma };
   }
   // For development only, remove before deployment
