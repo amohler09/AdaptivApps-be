@@ -1,36 +1,40 @@
-const OktaJwtVerifier = require('@okta/jwt-verifier');
+const jwt = require('jsonwebtoken');
+const jwksClient = require('jwks-rsa');
 
-// Constants
-const AUD = 'api://default';
-
-// Instantiate OKTA client with Mission Control credentials
-const O = new OktaJwtVerifier({
-  issuer: process.env.OAUTH_TOKEN_ENDPOINT,
-  clientId: process.env.OAUTH_CLIENT_ID,
-  assertClaims: {
-    aud: AUD,
-  },
+const client = jwksClient({
+  jwksUri: 'https://dev-sxhevmag.auth0.com/.well-known/jwks.json'
 });
 
-const decodeToken = async jwt => {
-  const match = jwt.match(/Bearer (.+)/);
+function getKey(header, cb){
+  client.getSigningKey(header.kid, function(err, key) {
+    var signingKey = key.publicKey || key.rsaPublicKey;
+    cb(null, signingKey);
+  });
+}
+
+const options = {
+  audience: 'asVyDNwKxm5ysKPmQ0cwhzLzT3WShqO0',
+  issuer: 'https://dev-sxhevmag.auth0.com/',
+  algorithms: ['RS256']
+};
+
+const decodeToken = async authorization => {
+  const match = authorization.match(/Bearer (.+)/);
 
   if (!match) {
     throw new Error('Invalid token');
   }
 
-  // Yoinks out the 'Bearer ' prefix
   const token = match[1];
 
-  try {
-    const result = await O.verifyAccessToken(token, AUD);
-    const {
-      claims: { sub: email, Auth: claims, uid: id },
-    } = result;
-    return { id, claims, email };
-  } catch (err) {
-    throw new Error(err);
-  }
+  jwt.verify(token, getKey, options, (err, decoded) => {
+    if(err) {
+      return reject(err);
+    }
+    const { email } = decoded;
+    console.log('Decoded is ', email)
+    return email;
+  });
 };
 
 module.exports = decodeToken;

@@ -7,11 +7,9 @@ const context = async ({ req }) => {
   const { authorization } = req.headers;
   if (authorization) {
     const user = await decodeToken(authorization);
+    console.log('decoded user is', user)
     return { ...req, user, prisma };
   }
-  // For development only, remove before deployment
-  // Or if you're testing authentication flow
-  return { req, prisma };
 };
 
 module.exports = context;
