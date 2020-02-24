@@ -10,16 +10,6 @@ const context = require('./context');
 
 const PORT = process.env.PORT || 8000;
 
-//takes out the bearer
-//   const match = jwt.match(/Bearer (.+)/);
-
-//   if (!match) {
-//     throw new Error('Invalid token');
-//   }
-
-//   // Yoinks out the 'Bearer ' prefix
-//   const token = match[1];
-
 async function main() {
   console.log('Importing schema');
 
