@@ -2,13 +2,23 @@
 
 const { importSchema } = require('graphql-import');
 const { ApolloServer, gql } = require('apollo-server');
-const jwt = require('jsonwebtoken');
-const jwksClient = require('jwks-rsa');
+// const jwt = require('jsonwebtoken');
+// const jwksClient = require('jwks-rsa');
 
 const resolvers = require('./resolvers');
 const context = require('./context');
 
 const PORT = process.env.PORT || 8000;
+
+//takes out the bearer
+//   const match = jwt.match(/Bearer (.+)/);
+
+//   if (!match) {
+//     throw new Error('Invalid token');
+//   }
+
+//   // Yoinks out the 'Bearer ' prefix
+//   const token = match[1];
 
 async function main() {
   console.log('Importing schema');

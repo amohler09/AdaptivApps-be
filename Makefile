@@ -121,7 +121,7 @@ apollo-token:
 	 curl --request POST \
   --url https://dev-sxhevmag.auth0.com/oauth/token \
   --header 'content-type: application/json' \
-  --data '{"client_id":"asVyDNwKxm5ysKPmQ0cwhzLzT3WShqO0","client_secret":"y65jNsxSjmTTuStYf9IqmaJN0TJsPGFYUmL8R6xNA583EyihD_HmqasT5IEzNqMW","audience":"https://dev-sxhevmag.auth0.com/api/v2/","grant_type":"client_credentials"}'
+  --data '{"client_id":"28y6dQAMR82ncLU2Tg4mYZZfqXMrTsXG","client_secret":"agpZ_5c9Of1Jan77BDgRcogfNFEGqkLN4xRCTUnmuvqsizJKFSoiZZV1E7grxlcm","audience":"https://dev-sxhevmag.auth0.com/api/v2/","grant_type":"client_credentials"}'
 
 
 # =================================================================

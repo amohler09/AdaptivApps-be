@@ -21,7 +21,7 @@ function getKey(header, cb) {
 
 const options = {
   audience: 'https://dev-sxhevmag.auth0.com/api/v2/',
-  issuer: `https://https://dev-sxhevmag.auth0.com/oauth/token/`,
+  issuer: `https://dev-sxhevmag.auth0.com/`,
   algorithms: ['RS256'],
 };
 
@@ -33,11 +33,17 @@ const context = async ({ req }) => {
         if (err) {
           return reject(err);
         }
-        resolve(decoded.email);
+        resolve(
+          decoded.sub,
+          decoded.iss,
+          decoded.email,
+          decoded.name,
+          decoded.profile
+        );
       });
     });
     return { ...req, user, prisma };
-  }
+  } else if (!token) throw new AuthenticationError('you must be logged in');
   // For development only, remove before deployment
   // Or if you're testing authentication flow
   return { req, prisma };
