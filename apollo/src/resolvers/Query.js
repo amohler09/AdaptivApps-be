@@ -12,7 +12,7 @@ const profile = async (_, args, context) => {
   console.log("Query.profile.args: %j", args)
 
   const profile = await context.prisma.profile(args.where);
-
+  const user = await context.user;
   console.log("Query.profile: %j", profile)
   
   return profile;
