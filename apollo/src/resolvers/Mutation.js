@@ -3,12 +3,13 @@
 /**
  * @param {{ data: import('../generated/prisma-client').ProfileCreateInput }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
- * @returns { import('../generated/prisma-client').ProfilePromise }
+ * @returns { Promise }
  */
-const createProfile = (_, args, context) => {
-  console.log("createProfile.args: %j", args)
-
-  const profile = context.prisma.createProfile(args.data);  
+const createProfile = async (_, args, context) => {
+  // Creates a profile based on args data
+  const profile = context.prisma.createProfile(args.data);
+  // This next line ensures user needs to be logged in, else return error
+  const user = await context.user;
 
   return profile;
 };
@@ -16,12 +17,14 @@ const createProfile = (_, args, context) => {
 /**
  * @param {{ data: import('../generated/prisma-client').ProfileUpdateInput, where: import('../generated/prisma-client').ProfileWhereUniqueInput }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
- * @returns { import('../generated/prisma-client').ProfilePromise }
+ * @returns { Promise }
  */
-const updateProfile = (_, args, context) => {
-  console.log("updateProfile.args: %j", args)
-
-  const profile = context.prisma.updateProfile(args);  
+const updateProfile = async (_, args, context) => {
+  console.log('updateProfile.args: %j', args);
+  // Updates a profile with args passed in
+  const profile = context.prisma.updateProfile(args);
+  // This next line ensures user needs to be logged in, else return error
+  const user = await context.user;
 
   return profile;
 };
@@ -29,12 +32,13 @@ const updateProfile = (_, args, context) => {
 /**
  * @param {{ where: import('../generated/prisma-client').ProfileWhereUniqueInput }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
- * @returns { import('../generated/prisma-client').ProfilePromise }
+ * @returns { Promise }
  */
-const deleteProfile = (_, args, context) => {
-  console.log("deleteProfile.args: %j", args);
-
+const deleteProfile = async (_, args, context) => {
+  // Deletes a profile with args passed in
   const profile = context.prisma.deleteProfile(args.where);
+  // This next line ensures user needs to be logged in, else return error
+  const user = await context.user;
 
   return profile;
 };
@@ -42,5 +46,5 @@ const deleteProfile = (_, args, context) => {
 module.exports = {
   createProfile,
   updateProfile,
-  deleteProfile
+  deleteProfile,
 };

@@ -9,12 +9,11 @@
  * @returns { Promise }
  */
 const profile = async (_, args, context) => {
-  console.log("Query.profile.args: %j", args)
-
+  // Finding the profile based on args specification
   const profile = await context.prisma.profile(args.where);
+  // This next line ensures user needs to be logged in, else return error
+  const user = await context.user;
 
-  console.log("Query.profile: %j", profile)
-  
   return profile;
 };
 
@@ -24,16 +23,15 @@ const profile = async (_, args, context) => {
  * @returns { Promise }
  */
 const profiles = async (_, args, context) => {
-  console.log("Query.profiles.args should be empty: %j", args)
-
+  // Returns all profiles
   const profile = await context.prisma.profiles(args);
+  // This next line ensures user needs to be logged in, else return error
   const user = await context.user;
-  console.log("Query.profiles: %j", profile)
-  console.log("The user is", user)
+
   return profile;
 };
 
 module.exports = {
   profile,
-  profiles
+  profiles,
 };
