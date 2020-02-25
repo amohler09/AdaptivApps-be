@@ -20,7 +20,6 @@ function getKey(header, cb) {
 }
 
 const options = {
-  audience: 'https://dev-sxhevmag.auth0.com/api/v2/',
   issuer: `https://dev-sxhevmag.auth0.com/`,
   algorithms: ['RS256'],
 };
