@@ -1,17 +1,22 @@
-const { prisma } = require('../generated/prisma-client');
-const { ApolloServer, gql, AuthenticationError } = require('apollo-server');
+// Imported Yarn dependencies
+const { AuthenticationError } = require('apollo-server');
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
+// Imported prisma-generated object
+const { prisma } = require('../generated/prisma-client');
 
-// const decodeToken = require('../auth');
+/**
+ * This file creates a context object to pass request, user, and prisma client
+ * into all resolvers. Throws an error if requests are not authenticated, meaning
+ * no token/authorization is attached.
+ */
 
-// Create context object to pass request, user and prisma client
-// into all resolvers. Throws error if requests are not authenticated.
-
+// Creates a jwks Client
 const client = jwksClient({
   jwksUri: `https://dev-sxhevmag.auth0.com/.well-known/jwks.json`,
 });
 
+// Creates a getKey function
 function getKey(header, cb) {
   client.getSigningKey(header.kid, function(err, key) {
     var signingKey = key.publicKey || key.rsaPublicKey;
@@ -19,15 +24,19 @@ function getKey(header, cb) {
   });
 }
 
+// Specify options
 const options = {
-  issuer: `https://dev-sxhevmag.auth0.com/`,
+  issuer: process.env.AUTH0_DOMAIN,
   algorithms: ['RS256'],
 };
 
+// Creating the context object
 const context = async ({ req }) => {
+  // Grabbing the token from headers
   const token = req.headers.authorization;
   if (token) {
     const user = new Promise((resolve, reject) => {
+      // Verify the token is valid
       jwt.verify(token, getKey, options, (err, decoded) => {
         if (err) {
           return reject(err);
@@ -42,10 +51,7 @@ const context = async ({ req }) => {
       });
     });
     return { ...req, user, prisma };
-  } else if (!token) throw new AuthenticationError('you must be logged in');
-  // For development only, remove before deployment
-  // Or if you're testing authentication flow
-  return { req, prisma };
+  } else throw new AuthenticationError('you must be logged in');
 };
 
 module.exports = context;
