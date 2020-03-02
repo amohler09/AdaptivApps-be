@@ -11,15 +11,9 @@
 const profile = async (_, args, context) => {
   // Finding the profile based on args specification
   const profile = await context.prisma.profile(args.where);
-<<<<<<< HEAD
-  const user = await context.user;
-  console.log("Query.profile: %j", profile)
-  
-=======
   // This next line ensures user needs to be logged in, else return error
   const user = await context.user;
 
->>>>>>> 7d77b5790922ade0e5e04a1222a6d5d484e207ba
   return profile;
 };
 
@@ -37,7 +31,41 @@ const profiles = async (_, args, context) => {
   return profile;
 };
 
+/* EVENT QUERIES */
+
+/**
+ * @param {{ where: import('../generated/prisma-client').EventWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @returns { Promise }
+ */
+const event = async (_, args, context) => {
+  // Returns all profiles
+  const event = await context.prisma.events(args);
+  // // This next line ensures user needs to be logged in, else return error
+  // const user = await context.user;
+
+  return event;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').EventWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @returns { Promise }
+ */
+const events = async (_, args, context) => {
+  // Returns all profiles
+  const event = await context.prisma.events(args);
+  // // This next line ensures user needs to be logged in, else return error
+  // const user = await context.user;
+
+  return event;
+};
+
+
 module.exports = {
   profile,
   profiles,
+  event,
+  events
 };
+
