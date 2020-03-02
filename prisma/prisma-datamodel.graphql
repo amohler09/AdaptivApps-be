@@ -11,3 +11,23 @@ type Profile @key(fields: "email"){
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
+
+type Event {
+  id: ID! @id
+  title: String!
+  startDate: String!
+  endDate: String!
+  activities: [Activity]! @relation(name: "Activity")
+}
+
+type Activity{
+  id: ID! @id
+  name: String!
+  startDate: String!
+  location: String! 
+  startTime: String!
+  endTime: String
+  type: String!
+  details: String
+  event: Event! @relation(link: INLINE, name: "Event")
+}

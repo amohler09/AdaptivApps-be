@@ -43,8 +43,53 @@ const deleteProfile = async (_, args, context) => {
   return profile;
 };
 
+/* ------------------------ EVENTS MUTATION ---------------------*/
+
+// @ts-check
+
+/**
+ * @param {{ data: import('../generated/prisma-client').EventCreateInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @returns { Promise }
+ */
+const createEvent = async (_, args, context) => {
+  // Creates a profile based on args data
+  const event = context.prisma.createEvent(args.data);
+  // This next line ensures user needs to be logged in, else return error
+  const user = await context.user;
+
+  return event;
+};
+
+/**
+ * @param {{ data: import('../generated/prisma-client').EventUpdateInput, where: import('../generated/prisma-client').EventWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @returns { Promise }
+ */
+const updateEvent = async (_, args, context) => {
+  console.log('updateProfile.args: %j', args);
+  // Updates an event with args passed in
+  const event = context.prisma.updateEvent(args);
+  // This next line ensures user needs to be logged in, else return error
+  const user = await context.user;
+
+  return event;
+};
+
+const deleteEvent = async (_, args, context) => {
+  // Deletes a profile with args passed in
+  const event = context.prisma.deleteEvent(args.where);
+  // This next line ensures user needs to be logged in, else return error
+  const user = await context.user;
+
+  return event;
+};
+
 module.exports = {
   createProfile,
   updateProfile,
   deleteProfile,
+  createEvent,
+  updateEvent,
+  deleteEvent,
 };

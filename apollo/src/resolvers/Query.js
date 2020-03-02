@@ -32,7 +32,41 @@ const profiles = async (_, args, context) => {
   return profile;
 };
 
+/* EVENT QUERIES */
+
+/**
+ * @param {{ where: import('../generated/prisma-client').EventWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @returns { Promise }
+ */
+const event = async (_, args, context) => {
+  // Returns all profiles
+  const event = await context.prisma.events(args);
+  // // This next line ensures user needs to be logged in, else return error
+  // const user = await context.user;
+
+  return event;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').EventWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @returns { Promise }
+ */
+const events = async (_, args, context) => {
+  // Returns all profiles
+  const event = await context.prisma.events(args);
+  // // This next line ensures user needs to be logged in, else return error
+  // const user = await context.user;
+
+  return event;
+};
+
+
 module.exports = {
   profile,
   profiles,
+  event,
+  events
 };
+
