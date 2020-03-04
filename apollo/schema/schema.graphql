@@ -3,3 +3,4 @@
 # import Mutation.createProfile from "generated/prisma.graphql"
 # import Mutation.updateProfile from "generated/prisma.graphql"
 # import Mutation.deleteProfile from "generated/prisma.graphql"
+# import Subscription.profile from "generated/prisma.graphql"
