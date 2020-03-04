@@ -34,7 +34,25 @@ const options = {
 const context = async ({ req, connection }) => {
   // Grabbing the token from headers
   if (connection) {
-    return { ...connection.context, prisma };
+    const token = connection.context.Authorization;
+    if (token) {
+      const user = new Promise((resolve, reject) => {
+        // Verify the token is valid
+        jwt.verify(token, getKey, options, (err, decoded) => {
+          if (err) {
+            return reject(err);
+          }
+          resolve(
+            decoded.sub,
+            decoded.iss,
+            decoded.email,
+            decoded.name,
+            decoded.profile
+          );
+        });
+      });
+      return { ...connection, user, prisma };
+    } else throw new AuthenticationError('you must be logged in');
   }
   const token = req.headers.authorization;
   if (token) {
