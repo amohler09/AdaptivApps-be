@@ -1,16 +1,9 @@
-// @ts-check
+const { PubSub } = require('apollo-server');
+const PROFILE_ADDED = 'PROFILE_ADDED';
+const pubsub = new PubSub();
 
-/**
- * @param {{ where: import('../generated/prisma-client').ProfileSubscriptionWhereInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
- * @returns { Promise }
- */
-const profile = async (_, args, context) => {
-  // This next line ensures user needs to be logged in, else return error
-  const user = await context.user;
-  console.log('Hitting here');
-  const subscribed = await context.prisma.$subscribe.profile(args.where);
-  return subscribed;
+const profile = {
+  subscribe: () => pubsub.asyncIterator([PROFILE_ADDED]),
 };
 
 module.exports = {

@@ -1,4 +1,6 @@
-// @ts-check
+const { PubSub } = require('apollo-server');
+const PROFILE_ADDED = 'PROFILE_ADDED';
+const pubsub = new PubSub();
 
 /**
  * @param {{ data: import('../generated/prisma-client').ProfileCreateInput }} args
@@ -8,6 +10,9 @@
 const createProfile = async (_, args, context) => {
   // Creates a profile based on args data
   const profile = context.prisma.createProfile(args.data);
+
+  pubsub.publish(PROFILE_ADDED, { profile: args.data });
+
   // This next line ensures user needs to be logged in, else return error
   const user = await context.user;
 
