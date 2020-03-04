@@ -5,7 +5,8 @@
   "author": "Lambda Labs",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon src/server.js "
+    "server": "nodemon src/server.js",
+    "test": "jest --detectOpenHandles --force-exit"
   },
   "dependencies": {
     "@okta/jwt-verifier": "^1.0.0",
@@ -25,6 +26,7 @@
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^25.1.0",
     "prettier": "^1.19.1"
   }
 }
