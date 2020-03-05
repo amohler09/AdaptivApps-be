@@ -10,8 +10,8 @@ type Profile @key(fields: "email") {
   legal: Boolean
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  events: [Event]! @relation(name: "Event")
-  activities: [Activity]! @relation(name: "Profile")
+  events: [Event]! @relation(name: "Events")
+  activities: [Activity]! @relation(name: "Profiles")
 }
 
 type Event {
@@ -19,8 +19,9 @@ type Event {
   title: String!
   startDate: String!
   endDate: String!
+  location: String!
   activities: [Activity]! @relation(name: "Activity")
-  attendees: [Profile]! @relation(name: "Event")
+  attendees: [Profile]! @relation(name: "Events")
 }
 
 type Activity {
@@ -32,6 +33,6 @@ type Activity {
   endTime: String
   type: String!
   details: String
-  event: Event! @relation(link: INLINE, name: "Activity")
-  participants: [Profile]! @relation(name: "Profile")
+  event: Event! @relation(name: "Activity")
+  participants: [Profile]! @relation(name: "Profiles")
 }

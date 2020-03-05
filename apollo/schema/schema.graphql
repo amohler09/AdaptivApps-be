@@ -19,3 +19,10 @@
 # import Mutation.createActivity from "generated/prisma.graphql"
 # import Mutation.updateActivity from "generated/prisma.graphql"
 # import Mutation.deleteActivity from "generated/prisma.graphql"
+
+# import Profile.events from "generated/prisma.graphql"
+# import Profile.activities from "generated/prisma.graphql"
+# import Event.activities from "generated/prisma.graphql"
+# import Event.attendees from "generated/prisma.graphql"
+# import Activity.participants from "generated/prisma.graphql"
+# import Activity.event from "generated/prisma.graphql"

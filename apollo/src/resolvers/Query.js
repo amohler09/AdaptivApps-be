@@ -59,6 +59,7 @@ const events = async (_, args, context) => {
   const event = await context.prisma.events(args);
   // This next line ensures user needs to be logged in, else return error
   const user = await context.user;
+  console.log('hitting here');
 
   return event;
 };
