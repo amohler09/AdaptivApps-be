@@ -13,8 +13,9 @@
 const profile = async (_, args, context) => {
   // Finding the profile based on args specification
   const profile = await context.prisma.profile(args.where);
-  // This next line ensures user needs to be logged in, else return error
+
   const user = await context.user;
+  console.log("Query.profile: %j", profile)
 
   return profile;
 };
@@ -101,3 +102,4 @@ module.exports = {
   activity,
   activities,
 };
+

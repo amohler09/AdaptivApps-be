@@ -2,5 +2,5 @@ EnvironmentName=production
 
 ApolloDockerImage=lambdaschoollabs/adaptivapps-apollo:latest
 
-OAuthTokenEndpoint=https://dev-173777.okta.com/oauth2/default
-OAuthClientID=0oa23ze1sdfwtoKNQ357
+OAuthTokenEndpoint=https://dev-sxhevmag.auth0.com/oauth/token
+OAuthClientID=gox0c4lyQyHbXec169D1mSBYGB5zxDlo
