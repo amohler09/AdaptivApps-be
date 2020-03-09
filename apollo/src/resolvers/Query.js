@@ -3,6 +3,8 @@
 // Queries must be defined to return fields of the same type
 // See the Query field in the type definitions for examples
 
+// --------------------------------------------------------------------- Profile Query ---------------------------------------------------------------------
+
 /**
  * @param {{ where: import('../generated/prisma-client').ProfileWhereUniqueInput }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
@@ -32,7 +34,7 @@ const profiles = async (_, args, context) => {
   return profile;
 };
 
-/* EVENT QUERIES */
+// --------------------------------------------------------------------- Event Query ---------------------------------------------------------------------
 
 /**
  * @param {{ where: import('../generated/prisma-client').EventWhereUniqueInput }} args
@@ -42,8 +44,8 @@ const profiles = async (_, args, context) => {
 const event = async (_, args, context) => {
   // Returns all profiles
   const event = await context.prisma.events(args);
-  // // This next line ensures user needs to be logged in, else return error
-  // const user = await context.user;
+  // This next line ensures user needs to be logged in, else return error
+  const user = await context.user;
 
   return event;
 };
@@ -56,17 +58,48 @@ const event = async (_, args, context) => {
 const events = async (_, args, context) => {
   // Returns all profiles
   const event = await context.prisma.events(args);
-  // // This next line ensures user needs to be logged in, else return error
-  // const user = await context.user;
+  // This next line ensures user needs to be logged in, else return error
+  const user = await context.user;
 
   return event;
 };
 
+// --------------------------------------------------------------------- Activity Query ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').ActivityWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @returns { Promise }
+ */
+const activity = async (_, args, context) => {
+  // Returns all profiles
+  const activity = await context.prisma.activity(args.where);
+  // This next line ensures user needs to be logged in, else return error
+  const user = await context.user;
+
+  return activity;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').ActivityWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @returns { Promise }
+ */
+const activities = async (_, args, context) => {
+  // Returns all profiles
+  const activity = await context.prisma.activities(args);
+  // This next line ensures user needs to be logged in, else return error
+  const user = await context.user;
+
+  return activity;
+};
 
 module.exports = {
   profile,
   profiles,
   event,
-  events
+  events,
+  activity,
+  activities,
 };
 
