@@ -1,5 +1,6 @@
 EnvironmentName=production
-
+PRISMA_SECRET=somejibberish
+PRISMA_MANAGEMENT_API_SECRET=someotherjibberish
 ApolloDockerImage=lambdaschoollabs/adaptivapps-apollo:latest
 
 OAuthTokenEndpoint=https://adaptivdev.auth0.com/oauth/token
