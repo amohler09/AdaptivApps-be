@@ -1,5 +1,7 @@
 ApplicationName=adaptivapps
 ApplicationDomainNamespace=adaptivdev.net
+PRISMA_SECRET=somejibberish
+PRISMA_MANAGEMENT_API_SECRET=someotherjibberish
 
 ApolloServicePort=8000
 PrismaServicePort=8000
