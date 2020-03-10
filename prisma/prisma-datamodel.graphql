@@ -34,5 +34,8 @@ type Activity {
   type: String!
   details: String
   event: Event! @relation(name: "Activity")
-  participants: [Profile]! @relation(name: "Profiles")
+  athletes: [Profile]! @relation(name: "Athletes")
+  volunteers: [Profile]! @relation(name: "Volunteers")
+  coaches: [Profile]! @relation(name: "Coaches")
+  other: [Profile]! @relation(name:"Other")
 }
