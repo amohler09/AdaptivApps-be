@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "server": "nodemon src/server.js",
-    "test": "jest --detectOpenHandles --forceExit"
+    "test": "jest --detectOpenHandles --force-exit"
   },
   "dependencies": {
     "@okta/jwt-verifier": "^1.0.0",
