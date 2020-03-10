@@ -1,4 +1,4 @@
-type Profile @key(fields: "email"){
+type Profile @key(fields: "email") {
   id: ID! @id
   email: String! @unique
   firstName: String
@@ -10,4 +10,29 @@ type Profile @key(fields: "email"){
   legal: Boolean
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+  events: [Event]! @relation(name: "Events")
+  activities: [Activity]! @relation(name: "Profiles")
+}
+
+type Event {
+  id: ID! @id
+  title: String!
+  startDate: String!
+  endDate: String!
+  location: String!
+  activities: [Activity]! @relation(name: "Activity")
+  attendees: [Profile]! @relation(name: "Events")
+}
+
+type Activity {
+  id: ID! @id
+  name: String!
+  startDate: String!
+  location: String!
+  startTime: String!
+  endTime: String
+  type: String!
+  details: String
+  event: Event! @relation(name: "Activity")
+  participants: [Profile]! @relation(name: "Profiles")
 }

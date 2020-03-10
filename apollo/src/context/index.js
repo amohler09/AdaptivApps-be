@@ -1,5 +1,5 @@
 // Imported Yarn dependencies
-const { AuthenticationError } = require('apollo-server');
+const { AuthenticationError, PubSub } = require('apollo-server');
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
 // Imported prisma-generated object
@@ -31,8 +31,29 @@ const options = {
 };
 
 // Creating the context object
-const context = async ({ req }) => {
+const context = async ({ req, connection }) => {
   // Grabbing the token from headers
+  if (connection) {
+    const token = connection.context.Authorization;
+    if (token) {
+      const user = new Promise((resolve, reject) => {
+        // Verify the token is valid
+        jwt.verify(token, getKey, options, (err, decoded) => {
+          if (err) {
+            return reject(err);
+          }
+          resolve(
+            decoded.sub,
+            decoded.iss,
+            decoded.email,
+            decoded.name,
+            decoded.profile
+          );
+        });
+      });
+      return { ...connection, user, prisma };
+    } else throw new AuthenticationError('you must be logged in');
+  }
   const token = req.headers.authorization;
   if (token) {
     const user = new Promise((resolve, reject) => {
