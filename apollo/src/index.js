@@ -20,7 +20,10 @@ async function main() {
     resolvers,
     typeDefs: gql(typeDefs),
     context,
-    cors: true,
+    cors: {
+      origin: '*', // <- allow request from all domains
+      credentials: true,
+    },
     dataSources: () => ({}),
   });
 
