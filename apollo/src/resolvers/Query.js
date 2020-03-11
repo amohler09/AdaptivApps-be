@@ -43,7 +43,7 @@ const profiles = async (_, args, context) => {
  */
 const event = async (_, args, context) => {
   // Returns all profiles
-  const event = await context.prisma.events(args);
+  const event = await context.prisma.event(args.where);
   // This next line ensures user needs to be logged in, else return error
   const user = await context.user;
 
