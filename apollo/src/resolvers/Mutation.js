@@ -1,17 +1,27 @@
+//@ts-check
+
+const { AuthenticationError } = require('apollo-server');
+
 // --------------------------------------------------------------------- Profile Mutations ---------------------------------------------------------------------
 
 /**
  * @param {{ data: import('../generated/prisma-client').ProfileCreateInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
 const createProfile = async (_, args, context) => {
+  const currentUser = context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Query.profile: %O', currentUser);
+
   // Creates a profile based on args data
   const profile = context.prisma.createProfile(args.data);
 
   // This next line ensures user needs to be logged in, else return error
-  const user = await context.user;
-
+  
   return profile;
 };
 
