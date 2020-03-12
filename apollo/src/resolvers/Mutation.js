@@ -162,15 +162,20 @@ const updateActivity = async (_, args, context) => {
 
 /**
  * @param {{ where: import('../generated/prisma-client').ActivityWhereUniqueInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
 const deleteActivity = async (_, args, context) => {
+   // This next line ensures user needs to be logged in, else return error
+   const currentUser = context.user;
+   if (typeof currentUser === context.user) {
+     context.logger.error('API called by unauthenticated user.');
+     throw new AuthenticationError('Must be authenticated.')
+   }
+   context.logger.debug('Mutation.deleteActivity: %O', currentUser);
   // Deletes an activity with args passed in
   const activity = context.prisma.deleteActivity(args.where);
-  // This next line ensures user needs to be logged in, else return error
-  const user = await context.user;
-
+ 
   return activity;
 };
 
