@@ -10,6 +10,7 @@ const { AuthenticationError } = require('apollo-server');
  * @returns { Promise }
  */
 const createProfile = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
   const currentUser = context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
@@ -19,8 +20,6 @@ const createProfile = async (_, args, context) => {
 
   // Creates a profile based on args data
   const profile = context.prisma.createProfile(args.data);
-
-  // This next line ensures user needs to be logged in, else return error
   
   return profile;
 };
@@ -31,6 +30,7 @@ const createProfile = async (_, args, context) => {
  * @returns { Promise }
  */
 const updateProfile = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
   const currentUser = context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user.');
@@ -39,7 +39,6 @@ const updateProfile = async (_, args, context) => {
   context.logger.debug('Mutation.updateProfile: %O', currentUser);
   // Updates a profile with args passed in
   const profile = context.prisma.updateProfile(args);
-  // This next line ensures user needs to be logged in, else return error
   
   return profile;
 };
@@ -50,6 +49,7 @@ const updateProfile = async (_, args, context) => {
  * @returns { Promise }
  */
 const deleteProfile = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
   const currentUser = context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user.');
@@ -57,9 +57,7 @@ const deleteProfile = async (_, args, context) => {
   }
   context.logger.debug('Mutation.deleteProfile: %O', currentUser);
   // Deletes a profile with args passed in
-  const profile = context.prisma.deleteProfile(args.where);
-  // This next line ensures user needs to be logged in, else return error
-  
+  const profile = context.prisma.deleteProfile(args.where);  
 
   return profile;
 };
@@ -72,6 +70,7 @@ const deleteProfile = async (_, args, context) => {
  * @returns { Promise }
  */
 const createEvent = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
   const currentUser = context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('Api called by unauthenticated user.');
@@ -80,22 +79,26 @@ const createEvent = async (_, args, context) => {
   context.logger.debug('Mutation.createEvent: %O', currentUser);
   // Creates a profile based on args data
   const event = context.prisma.createEvent(args.data);
-  // This next line ensures user needs to be logged in, else return error
-
+  
   return event;
 };
 
 /**
  * @param {{ data: import('../generated/prisma-client').EventUpdateInput, where: import('../generated/prisma-client').EventWhereUniqueInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
 const updateEvent = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.updateEvent: %O', currentUser);
   // Updates an event with args passed in
   const event = context.prisma.updateEvent(args);
-  // This next line ensures user needs to be logged in, else return error
-  const user = await context.user;
-
+  
   return event;
 };
 
