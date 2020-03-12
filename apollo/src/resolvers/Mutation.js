@@ -104,15 +104,20 @@ const updateEvent = async (_, args, context) => {
 
 /**
  * @param {{ where: import('../generated/prisma-client').EventWhereUniqueInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
 const deleteEvent = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.')
+  }
+  context.logger.debug('Mutation.deleteEvent: %O', currentUser);
   // Deletes an Event with args passed in
   const event = context.prisma.deleteEvent(args.where);
-  // This next line ensures user needs to be logged in, else return error
-  const user = await context.user;
-
+  
   return event;
 };
 
