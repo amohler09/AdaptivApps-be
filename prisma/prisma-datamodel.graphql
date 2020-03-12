@@ -20,7 +20,7 @@ type Event {
   startDate: String!
   endDate: String!
   location: String!
-  activities: [Activity]! @relation(name: "Activity")
+  activities: [Activity]! @relation(name: "Activity", onDelete: CASCADE)
   attendees: [Profile]! @relation(name: "Events")
 }
 
