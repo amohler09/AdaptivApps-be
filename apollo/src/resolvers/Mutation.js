@@ -46,14 +46,20 @@ const updateProfile = async (_, args, context) => {
 
 /**
  * @param {{ where: import('../generated/prisma-client').ProfileWhereUniqueInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma }} context
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
 const deleteProfile = async (_, args, context) => {
+  const currentUser = context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.deleteProfile: %O', currentUser);
   // Deletes a profile with args passed in
   const profile = context.prisma.deleteProfile(args.where);
   // This next line ensures user needs to be logged in, else return error
-  const user = await context.user;
+  
 
   return profile;
 };
@@ -66,10 +72,11 @@ const deleteProfile = async (_, args, context) => {
  * @returns { Promise }
  */
 const createEvent = async (_, args, context) => {
+  const user = context.user;
   // Creates a profile based on args data
   const event = context.prisma.createEvent(args.data);
   // This next line ensures user needs to be logged in, else return error
-  const user = await context.user;
+  
 
   return event;
 };
