@@ -1,3 +1,5 @@
+// @ts-check
+
 // Apollo dependencies
 const { AuthenticationError } = require('apollo-server');
 const jwt = require('jsonwebtoken');
@@ -34,7 +36,7 @@ function User(id, name, email, groups) {
 // Options used for verifying the JWT
 const jwtVerifyOptions = {
   // Check the issuer to validate the source of the JWT
-  issuer: process.env.AUTH0_DOMAIN,
+  issuer: process.env.JWT_ISSUER,
   algorithms: ['RS256'],
 };
 
