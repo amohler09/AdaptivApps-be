@@ -19,7 +19,7 @@ const createProfile = async (_, args, context) => {
   context.logger.debug('Mutation.createProfile: %O', currentUser);
 
   // Creates a profile based on args data
-  const profile = context.prisma.createProfile(args.data);
+  const profile = await context.prisma.createProfile(args.data);
   
   return profile;
 };
@@ -38,7 +38,7 @@ const updateProfile = async (_, args, context) => {
   }
   context.logger.debug('Mutation.updateProfile: %O', currentUser);
   // Updates a profile with args passed in
-  const profile = context.prisma.updateProfile(args);
+  const profile = await context.prisma.updateProfile(args);
   
   return profile;
 };
@@ -57,7 +57,7 @@ const deleteProfile = async (_, args, context) => {
   }
   context.logger.debug('Mutation.deleteProfile: %O', currentUser);
   // Deletes a profile with args passed in
-  const profile = context.prisma.deleteProfile(args.where);  
+  const profile = await context.prisma.deleteProfile(args.where);  
 
   return profile;
 };
@@ -78,7 +78,7 @@ const createEvent = async (_, args, context) => {
   }
   context.logger.debug('Mutation.createEvent: %O', currentUser);
   // Creates a profile based on args data
-  const event = context.prisma.createEvent(args.data);
+  const event = await context.prisma.createEvent(args.data);
   
   return event;
 };
@@ -97,7 +97,7 @@ const updateEvent = async (_, args, context) => {
   }
   context.logger.debug('Mutation.updateEvent: %O', currentUser);
   // Updates an event with args passed in
-  const event = context.prisma.updateEvent(args);
+  const event = await context.prisma.updateEvent(args);
   
   return event;
 };
@@ -116,7 +116,7 @@ const deleteEvent = async (_, args, context) => {
   }
   context.logger.debug('Mutation.deleteEvent: %O', currentUser);
   // Deletes an Event with args passed in
-  const event = context.prisma.deleteEvent(args.where);
+  const event = await context.prisma.deleteEvent(args.where);
   
   return event;
 };
@@ -137,7 +137,7 @@ const createActivity = async (_, args, context) => {
   }
   context.logger.debug('Mutation.createActivity: %O', currentUser);
   // Creates a profile based on args data
-  const activity = context.prisma.createActivity(args.data);
+  const activity = await context.prisma.createActivity(args.data);
  
   return activity;
 };
@@ -155,7 +155,7 @@ const updateActivity = async (_, args, context) => {
   }
   context.logger.debug('Mutation.updateActivity: %O', currentUser);
   // Updates an activity with args passed in
-  const activity = context.prisma.updateActivity(args);
+  const activity = await context.prisma.updateActivity(args);
   
   return activity;
 };
@@ -174,7 +174,7 @@ const deleteActivity = async (_, args, context) => {
    }
    context.logger.debug('Mutation.deleteActivity: %O', currentUser);
   // Deletes an activity with args passed in
-  const activity = context.prisma.deleteActivity(args.where);
+  const activity = await context.prisma.deleteActivity(args.where);
  
   return activity;
 };
