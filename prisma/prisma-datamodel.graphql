@@ -20,6 +20,8 @@ type Event {
   startDate: String!
   endDate: String!
   location: String!
+  imgUrl: String
+  details: String
   activities: [Activity]! @relation(name: "Activity", onDelete: CASCADE)
   attendees: [Profile]! @relation(name: "Events")
 }
@@ -37,5 +39,5 @@ type Activity {
   athletes: [Profile]! @relation(name: "Athletes")
   volunteers: [Profile]! @relation(name: "Volunteers")
   coaches: [Profile]! @relation(name: "Coaches")
-  other: [Profile]! @relation(name:"Other")
+  other: [Profile]! @relation(name: "Other")
 }
