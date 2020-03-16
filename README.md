@@ -4,8 +4,8 @@ After having prismatopia set up, run `make local-prisma-deploy` to generate data
 
 # Prismatopia
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/4774191eaf12577db1e2/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/adaptivapps-2-be/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/4774191eaf12577db1e2/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/adaptivapps-2-be/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/13f8d8a1198ebf1d8644/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/AdaptivApps-be/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/13f8d8a1198ebf1d8644/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/AdaptivApps-be/test_coverage)
 
 An API stack combining a bunch of super-awesome technologies: Apollo Server, Prisma, OAuth, OpenID Connect, JWT, Postgres, Docker, AWS and more!
 
@@ -23,18 +23,18 @@ This API is built as a very specific stack of technologies. There no options, ot
 
 Here are the technologies in this stack...
 
-* AWS
-  * Handles networking (ALB, VPC, etc.) and container management (ECS)
-* Apollo Server 2
-  * Provides a GraphQL server for resolvers, which is where your business logic lives
-* Prisma
-  * Provides an ORM to translate from Graphql to Postgres, Apollo resolvers mainly call a Prisma Client to access data
-* Postgres
-  * Provides persistent storage for data, this is managed by AWS RDS in production but is run in a container during local development
-* OAuth
-  * Apollo is setup for validating JWTs from clients
-* Docker
-  * There's a local Docker Compose setup for easy development. Also, all AWS services (except Postgres) run in containers
+- AWS
+  - Handles networking (ALB, VPC, etc.) and container management (ECS)
+- Apollo Server 2
+  - Provides a GraphQL server for resolvers, which is where your business logic lives
+- Prisma
+  - Provides an ORM to translate from Graphql to Postgres, Apollo resolvers mainly call a Prisma Client to access data
+- Postgres
+  - Provides persistent storage for data, this is managed by AWS RDS in production but is run in a container during local development
+- OAuth
+  - Apollo is setup for validating JWTs from clients
+- Docker
+  - There's a local Docker Compose setup for easy development. Also, all AWS services (except Postgres) run in containers
 
 ## Local Development Workflow
 
@@ -117,8 +117,8 @@ Certainly some steps were skipped earlier, so here are the details to how to wor
 
 ### 1) Install tools
 
-* Docker
-* Prisma CLI
+- Docker
+- Prisma CLI
 
 ### 2) Create a domain on Okta
 
@@ -146,12 +146,12 @@ prisma_1    | Server running on :7000
 
 You should now be able to hit Prisma in the browser:
 
-* Prisma GraphQL Playground: <http://localhost:7000/>
-* Prisma Admin: <http://localhost:7000/_admin>
+- Prisma GraphQL Playground: <http://localhost:7000/>
+- Prisma Admin: <http://localhost:7000/_admin>
 
 You should also be able to hit Apollo in the browser:
 
-* Apollo GraphQL Playground: <http://localhost:8000/>
+- Apollo GraphQL Playground: <http://localhost:8000/>
 
 Sweet! Now, you need to deploy something to Prisma, which starts out empty.
 
@@ -322,7 +322,6 @@ const user = async (_, args, context) => {
 
 If you're playing along at home, you may notice that Apollo updates whenever you save your resolvers. That's because Apollo is running with Nodemon, so your development experience can be fast and seamless.
 
-
 ## Operating in AWS
 
 Now that you've developed your GraphQL API locally, you're ready to push to AWS and run this thing in production. Prismatopia has you covered there as well.
@@ -344,6 +343,6 @@ Oh how do we love the Makefile! So handy! Anything you need to do with Prismatop
 
 Directories:
 
-* [The Apollo Layer](apollo/README.md)
-* [The Prisma Layer](prisma/README.md)
-* [The AWS Layer](cloudformation/README.md)
+- [The Apollo Layer](apollo/README.md)
+- [The Prisma Layer](prisma/README.md)
+- [The AWS Layer](cloudformation/README.md)

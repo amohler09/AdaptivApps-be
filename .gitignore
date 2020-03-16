@@ -1,6 +1,8 @@
 # dependencies
 apollo/schema/generated
+apollo/node_modules
 apollo/src/generated/prisma-client
+prisma/node_modules
 
 # dotenv environment variables file
 .env
