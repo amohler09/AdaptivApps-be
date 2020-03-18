@@ -69,7 +69,7 @@ const deleteProfile = async (_, args, context) => {
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
-const createEvent = async (_, args, context) => {
+const createEvent = (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
   const currentUser = context.user;
   if (typeof currentUser === 'undefined') {
@@ -78,7 +78,7 @@ const createEvent = async (_, args, context) => {
   }
   context.logger.debug('Mutation.createEvent: %O', currentUser);
   // Creates a profile based on args data
-  const event = await context.prisma.createEvent(args.data);
+  const event = context.prisma.createEvent(args.data);
   
   return event;
 };
@@ -139,7 +139,7 @@ const createActivity = async (_, args, context) => {
   // Creates a profile based on args data
   const activity = await context.prisma.createActivity(args.data);
  
-  return activity;
+  return activity; 
 };
 /**
  * @param {{ data: import('../generated/prisma-client').ActivityUpdateInput, where: import('../generated/prisma-client').ActivityWhereUniqueInput }} args
