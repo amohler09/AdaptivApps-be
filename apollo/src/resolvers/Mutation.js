@@ -128,7 +128,7 @@ const deleteEvent = async (_, args, context) => {
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
-const createActivity = async (_, args, context) => {
+const createActivity = (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
   const currentUser = context.user;
   if (typeof currentUser === context.user) {
@@ -137,7 +137,7 @@ const createActivity = async (_, args, context) => {
   }
   context.logger.debug('Mutation.createActivity: %O', currentUser);
   // Creates a profile based on args data
-  const activity = await context.prisma.createActivity(args.data);
+  const activity = context.prisma.createActivity(args.data);
  
   return activity; 
 };
