@@ -1,6 +1,9 @@
 // We're going to use this as input, as it would be used in runtime
 const generatedPrismaInput = require('../generated/prisma-client')
 
+const { AuthenticationError } = require('apollo-server');
+const winston = require('winston');
+
 // This is the unit under test
 const { createProfile, createActivity, createEvent, updateProfile, updateEvent, updateActivity, deleteProfile } = require('./Mutation.js')
 
@@ -12,6 +15,7 @@ jest.mock('../context')
 // --------------------------------Create Profile -------------------------------------
 
 it('Creates profile', async () => {
+
   // Add something to the input
   generatedPrismaInput.email = "sometest@email"
 
@@ -22,7 +26,7 @@ it('Creates profile', async () => {
   await createProfile("", args, mockContext)
 
   // Be sure that the unit under test called the underlying Prisma client with the input we gave it
-  expect(mockContext.prisma.createProfile).toHaveBeenCalledWith(generatedPrismaInput)
+  expect(mockPrismaClient.createProfile).toHaveBeenCalledWith(generatedPrismaInput)
 })
 
 it('Has correct profile information', async () => {
@@ -174,8 +178,6 @@ it('Has correct profile information', async () => {
   generatedPrismaInput.name = "Archery"
   generatedPrismaInput.event = "Summer Games"
   
-
-
   // We need to pass these args, just like Apollo would
   const args = { data: generatedPrismaInput}
 
@@ -214,3 +216,18 @@ it('Updates Activity', async () => {
   }))
 })
 
+//-----------------------------------Join Event -------------------------------------------------------------------------
+
+// it(' User joins an event', async () => {
+
+//   generatedPrismaInput.email = "test@test";
+//   generatedPrismaInput.firstName = "Glenn"
+//   generatedPrismaInput.lastName = "Chirvin"
+
+//   generatedPrismaInput.title = "The Finals"
+//   generatedPrismaInput.attendees = [];
+
+//   const args ={email: "test@test", firstName: "Glenn", lastName = "Chirvin", where:{title:"The Finals"}}
+  
+//   await updateActivity("", args.data, mockContext)
+// })

@@ -2,6 +2,8 @@
 
 After having prismatopia set up, run `make local-prisma-deploy` to generate database
 
+*For Windows 10 Pro Users: run 'docker-compose up --build'*
+
 # Prismatopia
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/13f8d8a1198ebf1d8644/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/AdaptivApps-be/maintainability)
@@ -83,13 +85,19 @@ This command will do some cleanup of your Docker environment, which can get mess
 
 This is a big one! It will use Docker Compose to bring up a local environment with a running Apollo Server, Prisma Server and Postgres Server.
 
+*For Windows 10 Pro Users: run 'docker-compose up --build'*
+
 #### `make prisma-generate`
 
 Generates a Prisma client and GraphQL model from your Prisma data model for use in your Apollo resolvers.
 
+*For Windows 10 Pro Users: run 'prisma generate'*
+
 #### `make local-prisma-deploy`
 
 Deploys your Prisma data model to the locally running Prisma server.
+
+*For Windows 10 Pro Users: run 'prisma deploy'*
 
 #### `make local-prisma-reseed`
 
@@ -98,6 +106,8 @@ Resets and reseeds data into the locally running Prisma server.
 #### `make local-prisma-token`
 
 Grabs a token that you can use in the GraphQL Playground of your locally running Prisma server.
+
+*For Windows 10 Pro Users: run 'prisma token'*
 
 #### `make apollo-build`
 
@@ -110,6 +120,8 @@ Builds a fresh new Docker image from the contents of the `apollo` folder and pus
 #### `make apollo-token`
 
 Grabs a token, using the `OAUTH_TOKEN_ENDPOINT`, `TEST_OAUTH_CLIENT_ID` and `TEST_OAUTH_CLIENT_SECRET` environment variables. Very handy to use in the Apollo GraphQL Playground.
+
+*For Windows 10 Pro Users: run 'apollo token'*
 
 ## Detailed Local Development Workflow
 
@@ -131,6 +143,8 @@ Create an `.env` file in the root directory as described above
 ### Start Prismatopia
 
 `make local-up`
+
+*For Windows 10 Pro Users: run 'docker-compose up --build'*
 
 Prisma, Apollo and Postgres should be running now, check the output for the endpoints:
 
@@ -158,6 +172,8 @@ Sweet! Now, you need to deploy something to Prisma, which starts out empty.
 ### Deploy data model to Prisma
 
 `make local-prisma-deploy`
+
+*For Windows 10 Pro Users: run 'prisma deploy'*
 
 ### Play with Prisma
 
