@@ -1,9 +1,6 @@
 // We're going to use this as input, as it would be used in runtime
 const generatedPrismaInput = require('../generated/prisma-client')
 
-const { AuthenticationError } = require('apollo-server');
-const winston = require('winston');
-
 // This is the unit under test
 const { createProfile, createActivity, createEvent, updateProfile, updateEvent, updateActivity, deleteProfile } = require('./Mutation.js')
 
@@ -26,14 +23,14 @@ it('Creates profile', async () => {
   await createProfile("", args, mockContext)
 
   // Be sure that the unit under test called the underlying Prisma client with the input we gave it
-  expect(mockPrismaClient.createProfile).toHaveBeenCalledWith(generatedPrismaInput)
+  expect(mockContext.prisma.createProfile).toHaveBeenCalledWith(generatedPrismaInput)
 })
 
 it('Has correct profile information', async () => {
   // Add something to the input
   generatedPrismaInput.email = "sometest@email";
   generatedPrismaInput.firstName = "Jimmy"
-  generatedPrismaInput.lastName = "Valmer"
+  generatedPrismaInput.lastName = "Washington"
 
 
   // We need to pass these args, just like Apollo would
@@ -46,7 +43,7 @@ it('Has correct profile information', async () => {
   expect(mockContext.prisma.createProfile).toHaveBeenCalledWith(expect.objectContaining({
     email: "sometest@email",
     firstName: "Jimmy",
-    lastName: "Valmer"
+    lastName: "Washington"
   }))
 })
 
@@ -74,15 +71,15 @@ it('Updates profile', async () => {
 //--------------------------------------- Delete Profile --------------------------------
 
 // it('Deletes profile', async () => {
-//   // Add something to the input
-//   generatedPrismaInput.email = "sometest@email"
-//   generatedPrismaInput.firstName = "Delete Me"
-//   generatedPrismaInput.lastName = "Plz"
+  
+//   mockContext.user = {email:"test@test", name:"Ron R. Test"}
 
-//   // console.log(data);
+//   //generatedPrismaInput.email = "test@test"
+
+//   console.log(mockContext.user);
 
 //   // // We need to pass these args, just like Apollo would
-//   const args = { data: generatedPrismaInput }
+//   const args = mockContext.user 
 
 //   // const where = args.firstName;
 
@@ -90,9 +87,9 @@ it('Updates profile', async () => {
 
 //   // Wait for the createProfile (the unit under test) to complete
 //   //await createProfile("", args, mockContext)
-//   await createProfile("", args, mockContext)
+//   //await createProfile("", args, mockContext)
 
-//   await deleteProfile(email="sometest@email", args, mockContext)
+//   await deleteProfile(mockContext.user.email="test@test", args.where, mockContext)
 
 //   // Be sure that the unit under test called the underlying Prisma client with the input we gave it
 //   //expect(mockContext.prisma.createProfile).toHaveBeenCalledWith(generatedPrismaInput)
@@ -218,16 +215,4 @@ it('Updates Activity', async () => {
 
 //-----------------------------------Join Event -------------------------------------------------------------------------
 
-// it(' User joins an event', async () => {
 
-//   generatedPrismaInput.email = "test@test";
-//   generatedPrismaInput.firstName = "Glenn"
-//   generatedPrismaInput.lastName = "Chirvin"
-
-//   generatedPrismaInput.title = "The Finals"
-//   generatedPrismaInput.attendees = [];
-
-//   const args ={email: "test@test", firstName: "Glenn", lastName = "Chirvin", where:{title:"The Finals"}}
-  
-//   await updateActivity("", args.data, mockContext)
-// })
