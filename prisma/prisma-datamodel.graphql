@@ -16,6 +16,11 @@ type Profile @key(fields: "email") {
 
 type Event {
   id: ID! @id
+  type: String
+  zoomLink: String
+  host: String
+  speakers: [String]!
+  sponsors: [String]!
   title: String!
   startDate: String!
   endDate: String!
