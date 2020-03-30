@@ -16,16 +16,16 @@ type Profile @key(fields: "email") {
 
 type Event {
   id: ID! @id
-  type: String
-  zoomLink: String
-  host: String
-  speakers: String!
-  sponsors: String!
+  type: String!
   title: String!
+  host: String
+  speakers: String
   startDate: String!
   endDate: String!
-  startTime: String!
+  startTime: String
   location: String!
+  zoomLink: String
+  sponsors: String
   imgUrl: String
   details: String
   activities: [Activity]! @relation(name: "Activity", onDelete: CASCADE)
