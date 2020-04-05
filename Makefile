@@ -393,7 +393,7 @@ aws-prisma-deploy: aws-env-banner
 	 printf "$(NO_COLOR)\n"																																											&& \
 	 printf "%s\n" "PRISMA_MANAGEMENT_API_SECRET: $${PRISMA_MANAGEMENT_API_SECRET}"															&& \
 	 printf "%s\n" "PRISMA_SECRET: $${PRISMA_SECRET}"																														&& \
-	 cd prisma && prisma deploy
+	 cd prisma && prisma deploy --force
 
 
 # ===========================================================================
