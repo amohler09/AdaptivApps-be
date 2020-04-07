@@ -26,7 +26,7 @@ type Event {
   location: String!
   zoomLink: String
   sponsors: String
-  imgUrl: String!
+  imgUrl: String
   details: String
   activities: [Activity]! @relation(name: "Activity", onDelete: CASCADE)
   attendees: [Profile]! @relation(name: "Events")
