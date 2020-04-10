@@ -124,12 +124,8 @@ const activities = async (_, args, context) => {
   return activity;
 };
 
-<<<<<<< HEAD
-// ------------------------------------- PARTICIPANTS QUERY ----------------------------
-=======
 // --------------------------------------------------------------------- Participant Query ---------------------------------------------------------------------
 
->>>>>>> c9816fb06e3735f2963a2cade719e68d6d3eb877
 /**
  * @param {{ where: import('../generated/prisma-client').ParticipantWhereUniqueInput }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
@@ -141,15 +137,9 @@ const participant = async (_, args, context) => {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
   }
-<<<<<<< HEAD
-  context.logger.debug('Query.activity: %O', currentUser);
-
-  // Returns a participant
-=======
   context.logger.debug('Query.participant: %O', currentUser);
 
   // Returns all profiles
->>>>>>> c9816fb06e3735f2963a2cade719e68d6d3eb877
   const participant = await context.prisma.participant(args.where);
 
   return participant;
@@ -166,24 +156,14 @@ const participants = async (_, args, context) => {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
   }
-<<<<<<< HEAD
-  context.logger.debug('Query.activities: %O', currentUser);
-
-  // Returns all participants
-=======
   context.logger.debug('Query.participants: %O', currentUser);
 
   // Returns all profiles
->>>>>>> c9816fb06e3735f2963a2cade719e68d6d3eb877
   const participant = await context.prisma.participants(args);
 
   return participant;
 };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c9816fb06e3735f2963a2cade719e68d6d3eb877
 module.exports = {
   profile,
   profiles,
@@ -191,11 +171,6 @@ module.exports = {
   events,
   activity,
   activities,
-<<<<<<< HEAD
-  participant,
-  participants
-=======
   participants,
   participant,
->>>>>>> c9816fb06e3735f2963a2cade719e68d6d3eb877
 };
