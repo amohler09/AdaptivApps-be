@@ -50,7 +50,7 @@ type Activity {
 }
 type Participant {
   id: ID! @id
-  user: Profile @relation(name: "Profile")
+  profile: Profile @relation(name: "Profile")
   roles: Role @relation(name: "Role")
 }
 

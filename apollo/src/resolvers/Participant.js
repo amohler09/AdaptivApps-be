@@ -1,8 +1,8 @@
 function profile(parent, args, context) {
-  return context.prisma.participants({ id: parent.id }).profile();
+  return context.prisma.participant({ id: parent.id }).profile();
 }
 function roles(parent, args, context) {
-  return context.prisma.participants({ id: parent.id }).roles();
+  return context.prisma.participant({ id: parent.id }).roles();
 }
 
 module.exports = {
