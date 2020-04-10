@@ -124,6 +124,46 @@ const activities = async (_, args, context) => {
   return activity;
 };
 
+// ------------------------------------- PARTICIPANTS QUERY ----------------------------
+/**
+ * @param {{ where: import('../generated/prisma-client').ParticipantWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const participant = async (_, args, context) => {
+  const currentUser = context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.activity: %O', currentUser);
+
+  // Returns a participant
+  const participant = await context.prisma.participant(args.where);
+
+  return participant;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').ParticipantWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const participants = async (_, args, context) => {
+  const currentUser = context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.activities: %O', currentUser);
+
+  // Returns all participants
+  const participant = await context.prisma.participants(args);
+
+  return participant;
+};
+
+
 module.exports = {
   profile,
   profiles,
@@ -131,4 +171,6 @@ module.exports = {
   events,
   activity,
   activities,
+  participant,
+  participants
 };
