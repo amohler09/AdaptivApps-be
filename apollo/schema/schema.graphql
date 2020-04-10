@@ -22,3 +22,9 @@
 # import Mutation.updateActivity from "generated/prisma.graphql"
 # import Mutation.deleteActivity from "generated/prisma.graphql"
 
+<<<<<<< HEAD
+=======
+# import Mutation.createParticipant from "generated/prisma.graphql"
+# import Mutation.updateParticipant from "generated/prisma.graphql"
+# import Mutation.deleteParticipant from "generated/prisma.graphql"
+>>>>>>> c9816fb06e3735f2963a2cade719e68d6d3eb877
