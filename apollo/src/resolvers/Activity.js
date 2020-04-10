@@ -18,7 +18,9 @@ function other(parent, args, context) {
   return context.prisma.activity({ id: parent.id }).other();
 }
 
-
+function participants(parent, args, context) {
+  return context.prisma.activity({ id: parent.id }).participants();
+}
 
 module.exports = {
   event,
@@ -26,4 +28,5 @@ module.exports = {
   coaches,
   volunteers,
   other,
+  participants,
 };
