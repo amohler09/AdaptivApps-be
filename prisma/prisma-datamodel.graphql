@@ -51,7 +51,7 @@ type Activity {
 type Participant {
   id: ID! @id
   profile: Profile @relation(name: "Profile")
-  roles: Role @relation(name: "Role")
+  role: Role @relation(name: "Role")
 }
 
 enum Role {
