@@ -43,10 +43,6 @@ type Activity {
   details: String
   event: Event! @relation(name: "Activity")
   participants: [Participant]! @relation(name: "Participant")
-  athletes: [Profile]! @relation(name: "Athletes")
-  volunteers: [Profile]! @relation(name: "Volunteers")
-  coaches: [Profile]! @relation(name: "Coaches")
-  other: [Profile]! @relation(name: "Other")
 }
 type Participant {
   id: ID! @id
