@@ -24,7 +24,7 @@ type Event {
   endDate: String!
   startTime: String
   location: String!
-  zoomLink: String
+  link: String
   sponsors: String
   imgUrl: String
   details: String
@@ -36,10 +36,11 @@ type Activity {
   id: ID! @id
   name: String!
   startDate: String!
-  location: String!
+  location: String
+  link: String
   startTime: String!
   endTime: String
-  type: String!
+  type: String
   details: String
   event: Event! @relation(name: "Activity")
   participants: [Participant]! @relation(name: "Participant")
