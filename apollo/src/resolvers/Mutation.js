@@ -20,7 +20,7 @@ const createProfile = async (_, args, context) => {
 
   // Creates a profile based on args data
   const profile = await context.prisma.createProfile(args.data);
-  
+
   return profile;
 };
 
@@ -39,7 +39,7 @@ const updateProfile = async (_, args, context) => {
   context.logger.debug('Mutation.updateProfile: %O', currentUser);
   // Updates a profile with args passed in
   const profile = await context.prisma.updateProfile(args);
-  
+
   return profile;
 };
 
@@ -57,7 +57,7 @@ const deleteProfile = async (_, args, context) => {
   }
   context.logger.debug('Mutation.deleteProfile: %O', currentUser);
   // Deletes a profile with args passed in
-  const profile = await context.prisma.deleteProfile(args.where);  
+  const profile = await context.prisma.deleteProfile(args.where);
 
   return profile;
 };
@@ -79,7 +79,7 @@ const createEvent = (_, args, context) => {
   context.logger.debug('Mutation.createEvent: %O', currentUser);
   // Creates a profile based on args data
   const event = context.prisma.createEvent(args.data);
-  
+
   return event;
 };
 
@@ -98,7 +98,7 @@ const updateEvent = async (_, args, context) => {
   context.logger.debug('Mutation.updateEvent: %O', currentUser);
   // Updates an event with args passed in
   const event = await context.prisma.updateEvent(args);
-  
+
   return event;
 };
 
@@ -112,12 +112,12 @@ const deleteEvent = async (_, args, context) => {
   const currentUser = context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.')
+    throw new AuthenticationError('Must be authenticated.');
   }
   context.logger.debug('Mutation.deleteEvent: %O', currentUser);
   // Deletes an Event with args passed in
   const event = await context.prisma.deleteEvent(args.where);
-  
+
   return event;
 };
 
@@ -138,8 +138,8 @@ const createActivity = (_, args, context) => {
   context.logger.debug('Mutation.createActivity: %O', currentUser);
   // Creates a profile based on args data
   const activity = context.prisma.createActivity(args.data);
- 
-  return activity; 
+
+  return activity;
 };
 /**
  * @param {{ data: import('../generated/prisma-client').ActivityUpdateInput, where: import('../generated/prisma-client').ActivityWhereUniqueInput }} args
@@ -156,7 +156,7 @@ const updateActivity = async (_, args, context) => {
   context.logger.debug('Mutation.updateActivity: %O', currentUser);
   // Updates an activity with args passed in
   const activity = await context.prisma.updateActivity(args);
-  
+
   return activity;
 };
 
@@ -166,17 +166,73 @@ const updateActivity = async (_, args, context) => {
  * @returns { Promise }
  */
 const deleteActivity = async (_, args, context) => {
-   // This next line ensures user needs to be logged in, else return error
-   const currentUser = context.user;
-   if (typeof currentUser === context.user) {
-     context.logger.error('API called by unauthenticated user.');
-     throw new AuthenticationError('Must be authenticated.')
-   }
-   context.logger.debug('Mutation.deleteActivity: %O', currentUser);
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.deleteActivity: %O', currentUser);
   // Deletes an activity with args passed in
   const activity = await context.prisma.deleteActivity(args.where);
- 
+
   return activity;
+};
+
+/**
+ * @param {{ data: import('../generated/prisma-client').ParticipantCreateInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const createParticipant = (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Mutation.createParticipant: %O', currentUser);
+  // Creates a profile based on args data
+  const participant = context.prisma.createParticipant(args.data);
+
+  return participant;
+};
+/**
+ * @param {{ data: import('../generated/prisma-client').ParticipantUpdateInput, where: import('../generated/prisma-client').ParticipantWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const updateParticipant = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.updateParticipant: %O', currentUser);
+  // Updates an participant with args passed in
+  const participant = await context.prisma.updateParticipant(args);
+
+  return participant;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').ParticipantWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const deleteParticipant = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.deleteParticipant: %O', currentUser);
+  // Deletes an participant with args passed in
+  const participant = await context.prisma.deleteParticipant(args.where);
+
+  return participant;
 };
 
 module.exports = {
@@ -189,4 +245,7 @@ module.exports = {
   createActivity,
   updateActivity,
   deleteActivity,
+  createParticipant,
+  updateParticipant,
+  deleteParticipant,
 };
