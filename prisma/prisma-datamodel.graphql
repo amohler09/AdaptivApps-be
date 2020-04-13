@@ -43,12 +43,12 @@ type Activity {
   type: String
   details: String
   event: Event! @relation(name: "Activity")
-  participants: [Participant]! @relation(name: "Participant")
+  participants: [Participant]! @relation(name: "Participant", onDelete: CASCADE)
 }
 type Participant {
   id: ID! @id
   profile: Profile @relation(name: "Profile")
-  role: Role @relation(name: "Role")
+  role: Role @relation(name: "Role", onDelete: CASCADE)
 }
 
 enum Role {
