@@ -1,5 +1,8 @@
 SHELL := bash
-.SHELLFLAGS := -eu -o pipefail -c  
+.SHELLFLAGS := -eu -o pipefail -c
+
+include .env
+export
 
 # =================================================================
 # = Utility targets ===============================================
@@ -112,16 +115,20 @@ apollo-push: apollo-build
 	 cd apollo && docker push $${APOLLO_CONTAINER_IMAGE}
 
 apollo-token:
-	@export $$(cat .env | xargs)																																								&& \
-	 printf "$(OK_COLOR)"																																												&& \
-	 printf "\n%s\n" "======================================================================================"		&& \
-	 printf "%s\n"   "= Grabbing token from: $${OAUTH_TOKEN_ENDPOINT}"																					&& \
-	 printf "%s\n"   "======================================================================================"		&& \
-	 printf "$(NO_COLOR)"																																												&& \
-	 curl --request POST \
-  --url https://dev-sxhevmag.auth0.com/oauth/token \
-  --header 'content-type: application/json' \
-  --data '{"client_id":"28y6dQAMR82ncLU2Tg4mYZZfqXMrTsXG","client_secret":"agpZ_5c9Of1Jan77BDgRcogfNFEGqkLN4xRCTUnmuvqsizJKFSoiZZV1E7grxlcm","audience":"https://dev-sxhevmag.auth0.com/api/v2/","grant_type":"client_credentials"}'
+	export $$(cat .env | xargs)																																								  && 			\
+	 printf "$(OK_COLOR)"																																												&& 			\
+	 printf "\n%s\n" "======================================================================================"		&& 			\
+	 printf "%s\n"   "= Grabbing token from: $${OAUTH_TOKEN_ENDPOINT}"																					&& 			\
+	 printf "%s\n"   "======================================================================================"		&& 			\
+	 printf "$(NO_COLOR)"																																												&& 			\
+	 curl --request POST																																										\
+		    --url "$${OAUTH_TOKEN_ENDPOINT}"																																								\
+				--header 'accept: application/json'																																			 			\
+		    --header 'content-type: application/x-www-form-urlencoded' 																							 			\
+		    --data grant_type=client_credentials																																					\
+				--data-urlencode audience="${OAUTH_AUDIENCE}"																																	\
+				--data-urlencode client_id=$${TEST_OAUTH_CLIENT_ID}																														\
+				--data-urlencode client_secret=$${TEST_OAUTH_CLIENT_SECRET}
 
 
 # =================================================================
@@ -355,7 +362,7 @@ aws-prisma-service-secret: env-ENVIRONMENT_NAME aws-env-banner
 	@echo PRISMA_SERVICE_API_SECRET_ARN_EXPORT: $(PRISMA_SERVICE_API_SECRET_ARN_EXPORT) && \
 	 echo PRISMA_SERVICE_API_SECRET_ARN: $(PRISMA_SERVICE_API_SECRET_ARN)								&& \
 	 echo PRISMA_SERVICE_API_SECRET: $(PRISMA_SERVICE_API_SECRET)
-	 
+
 
 
 # ===========================================================================
