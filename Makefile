@@ -122,13 +122,13 @@ apollo-token:
 	 printf "%s\n"   "======================================================================================"		&& 			\
 	 printf "$(NO_COLOR)"																																												&& 			\
 	 curl --request POST																																										\
-		    --url "$${OAUTH_TOKEN_ENDPOINT}"																																								\
+		    --url "${OAUTH_TOKEN_ENDPOINT}"																																								\
 				--header 'accept: application/json'																																			 			\
 		    --header 'content-type: application/x-www-form-urlencoded' 																							 			\
 		    --data grant_type=client_credentials																																					\
 				--data-urlencode audience="${OAUTH_AUDIENCE}"																																	\
-				--data-urlencode client_id=$${TEST_OAUTH_CLIENT_ID}																														\
-				--data-urlencode client_secret=$${TEST_OAUTH_CLIENT_SECRET}
+				--data-urlencode client_id=${TEST_OAUTH_CLIENT_ID}																														\
+				--data-urlencode client_secret=${TEST_OAUTH_CLIENT_SECRET}
 
 
 # =================================================================
