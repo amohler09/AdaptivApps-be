@@ -119,9 +119,9 @@ apollo-token:
 	 printf "%s\n"   "======================================================================================"		&& \
 	 printf "$(NO_COLOR)"																																												&& \
 	 curl --request POST \
-  --url https://dev-sxhevmag.auth0.com/oauth/token \
+  --url https://angelcitysportsdev.auth0.com/oauth/token \
   --header 'content-type: application/json' \
-  --data '{"client_id":"28y6dQAMR82ncLU2Tg4mYZZfqXMrTsXG","client_secret":"agpZ_5c9Of1Jan77BDgRcogfNFEGqkLN4xRCTUnmuvqsizJKFSoiZZV1E7grxlcm","audience":"https://dev-sxhevmag.auth0.com/api/v2/","grant_type":"client_credentials"}'
+  --data '{"client_id":"m45sOA40VUZEoYJ9221awI02xHs9dgOx","client_secret":"eD1AaAFMwfcuFC_q2DPEdHxsgZw_k9zG-YW1YWPXzEvZ1DQYAckdy1FwZ6JlR29x","audience":"https://angelcitysportsdev.auth0.com/api/v2/","grant_type":"client_credentials"}'
 
 
 # =================================================================
