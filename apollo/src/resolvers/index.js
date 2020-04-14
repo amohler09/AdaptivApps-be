@@ -10,6 +10,7 @@ const Mutation = require('./Mutation');
 const Activity = require('./Activity');
 const Profile = require('./Profile');
 const Event = require('./Event');
+const Participant = require('./Participant');
 
 const resolvers = {
   Query,
@@ -17,6 +18,7 @@ const resolvers = {
   Activity,
   Profile,
   Event,
+  Participant,
 };
 
 module.exports = resolvers;
