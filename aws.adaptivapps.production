@@ -2,11 +2,11 @@ EnvironmentName=production
 
 ApolloDockerImage=lambdaschoollabs/adaptivapps-apollo:latest
 
-OAuthTokenEndpoint=https://adaptivdev.auth0.com/oauth/token
-OAuthClientID=sg7bkQ4w6huBrtXteupZgKTK2in0hNQy
+OAuthTokenEndpoint=https://angelcitysportspro.auth0.com/oauth/token
+OAuthClientID=U8ObmFaUQGHoA7R5Yh0VPgZq54PKHgUN
 
-JwksUri=https://adaptivdev.auth0.com/.well-known/jwks.json
+JwksUri=https://angelcitysportspro.auth0.com/.well-known/jwks.json
 
-JwtIssuer=https://adaptivdev.auth0.com/
+JwtIssuer=https://angelcitysportspro.auth0.com/
 
 LogLevel=debug
