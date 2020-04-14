@@ -196,7 +196,7 @@ aws-app-banner:
 # Show a banner before running targets for the whole application
 # TODO: aws iam get-user && aws iam list-account-aliases
 # =================================================================
-aws-app-banner: aws-cli-check env-APPLICATION_NAME
+aws-app-banner: env-APPLICATION_NAME
 	@printf "$(WARN_COLOR)"
 	@printf "%s\n" "======================================================================================"
 	@printf "%s\n" "= Attention!!"
