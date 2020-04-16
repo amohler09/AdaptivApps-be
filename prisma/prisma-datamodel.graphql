@@ -11,7 +11,7 @@ type Profile @key(fields: "email") {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   events: [Event]! @relation(name: "Events")
-  activities: [Activity]! @relation(name: "Profiles")
+  activities: [Participant]! @relation(name: "Profile")
 }
 
 type Event {
@@ -47,6 +47,7 @@ type Activity {
 }
 type Participant {
   id: ID! @id
+  activity: Activity! @relation(name: "Participant")
   profile: Profile @relation(name: "Profile")
   role: Role @relation(name: "Role", onDelete: CASCADE)
 }
