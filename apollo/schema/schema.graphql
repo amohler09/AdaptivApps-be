@@ -7,6 +7,9 @@
 # import Query.activity from "generated/prisma.graphql"
 # import Query.activities from "generated/prisma.graphql"
 
+# import Query.participant from "generated/prisma.graphql"
+# import Query.participants from "generated/prisma.graphql"
+
 # import Mutation.createProfile from "generated/prisma.graphql"
 # import Mutation.updateProfile from "generated/prisma.graphql"
 # import Mutation.deleteProfile from "generated/prisma.graphql"
@@ -18,3 +21,7 @@
 # import Mutation.createActivity from "generated/prisma.graphql"
 # import Mutation.updateActivity from "generated/prisma.graphql"
 # import Mutation.deleteActivity from "generated/prisma.graphql"
+
+# import Mutation.createParticipant from "generated/prisma.graphql"
+# import Mutation.updateParticipant from "generated/prisma.graphql"
+# import Mutation.deleteParticipant from "generated/prisma.graphql"

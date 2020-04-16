@@ -1,0 +1,12 @@
+EnvironmentName=production
+
+ApolloDockerImage=angelcityeventsadmin/apollo:latest
+
+OAuthTokenEndpoint=https://angelcitysportspro.auth0.com/oauth/token
+OAuthClientID=U8ObmFaUQGHoA7R5Yh0VPgZq54PKHgUN
+
+JwksUri=https://angelcitysportspro.auth0.com/.well-known/jwks.json
+
+JwtIssuer=https://angelcitysportspro.auth0.com/
+
+LogLevel=debug

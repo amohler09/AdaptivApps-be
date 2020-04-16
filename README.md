@@ -1,8 +1,4 @@
-# To set up database (from Jonathan):
-
-After having prismatopia set up, run `make local-prisma-deploy` to generate database
-
-*For Windows 10 Pro Users: run 'docker-compose up --build'*
+_For Windows 10 Pro Users: run 'docker-compose up --build'_
 
 # Prismatopia
 
@@ -85,19 +81,19 @@ This command will do some cleanup of your Docker environment, which can get mess
 
 This is a big one! It will use Docker Compose to bring up a local environment with a running Apollo Server, Prisma Server and Postgres Server.
 
-*For Windows 10 Pro Users: run 'docker-compose up --build'*
+_For Windows 10 Pro Users: run 'docker-compose up --build'_
 
 #### `make prisma-generate`
 
 Generates a Prisma client and GraphQL model from your Prisma data model for use in your Apollo resolvers.
 
-*For Windows 10 Pro Users: run 'prisma generate'*
+_For Windows 10 Pro Users: run 'prisma generate'_
 
 #### `make local-prisma-deploy`
 
 Deploys your Prisma data model to the locally running Prisma server.
 
-*For Windows 10 Pro Users: run 'prisma deploy'*
+_For Windows 10 Pro Users: run 'prisma deploy'_
 
 #### `make local-prisma-reseed`
 
@@ -107,7 +103,7 @@ Resets and reseeds data into the locally running Prisma server.
 
 Grabs a token that you can use in the GraphQL Playground of your locally running Prisma server.
 
-*For Windows 10 Pro Users: run 'prisma token'*
+_For Windows 10 Pro Users: run 'prisma token'_
 
 #### `make apollo-build`
 
@@ -121,7 +117,7 @@ Builds a fresh new Docker image from the contents of the `apollo` folder and pus
 
 Grabs a token, using the `OAUTH_TOKEN_ENDPOINT`, `TEST_OAUTH_CLIENT_ID` and `TEST_OAUTH_CLIENT_SECRET` environment variables. Very handy to use in the Apollo GraphQL Playground.
 
-*For Windows 10 Pro Users: run 'apollo token'*
+_For Windows 10 Pro Users: run 'apollo token'_
 
 ## Detailed Local Development Workflow
 
@@ -144,7 +140,7 @@ Create an `.env` file in the root directory as described above
 
 `make local-up`
 
-*For Windows 10 Pro Users: run 'docker-compose up --build'*
+_For Windows 10 Pro Users: run 'docker-compose up --build'_
 
 Prisma, Apollo and Postgres should be running now, check the output for the endpoints:
 
@@ -173,7 +169,7 @@ Sweet! Now, you need to deploy something to Prisma, which starts out empty.
 
 `make local-prisma-deploy`
 
-*For Windows 10 Pro Users: run 'prisma deploy'*
+_For Windows 10 Pro Users: run 'prisma deploy'_
 
 ### Play with Prisma
 

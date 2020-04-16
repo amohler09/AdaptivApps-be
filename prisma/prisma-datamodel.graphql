@@ -11,7 +11,7 @@ type Profile @key(fields: "email") {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   events: [Event]! @relation(name: "Events")
-  activities: [Activity]! @relation(name: "Profiles")
+  activities: [Participant]! @relation(name: "Profile")
 }
 
 type Event {
@@ -24,7 +24,7 @@ type Event {
   endDate: String!
   startTime: String
   location: String!
-  zoomLink: String
+  link: String
   sponsors: String
   imgUrl: String
   details: String
@@ -36,14 +36,25 @@ type Activity {
   id: ID! @id
   name: String!
   startDate: String!
-  location: String!
+  location: String
+  link: String
   startTime: String!
   endTime: String
-  type: String!
+  type: String
   details: String
   event: Event! @relation(name: "Activity")
-  athletes: [Profile]! @relation(name: "Athletes")
-  volunteers: [Profile]! @relation(name: "Volunteers")
-  coaches: [Profile]! @relation(name: "Coaches")
-  other: [Profile]! @relation(name: "Other")
+  participants: [Participant]! @relation(name: "Participant", onDelete: CASCADE)
+}
+type Participant {
+  id: ID! @id
+  activity: Activity! @relation(name: "Participant")
+  profile: Profile @relation(name: "Profile")
+  role: Role @relation(name: "Role", onDelete: CASCADE)
+}
+
+enum Role {
+  ATHLETE
+  VOLUNTEER
+  COACH
+  SPECTATOR
 }
