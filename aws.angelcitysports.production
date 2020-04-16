@@ -1,6 +1,6 @@
 EnvironmentName=production
 
-ApolloDockerImage=lambdaschoollabs/adaptivapps-apollo:latest
+ApolloDockerImage=angelcityeventsadmin/apollo:latest
 
 OAuthTokenEndpoint=https://angelcitysportspro.auth0.com/oauth/token
 OAuthClientID=U8ObmFaUQGHoA7R5Yh0VPgZq54PKHgUN
