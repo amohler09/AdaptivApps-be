@@ -12,6 +12,9 @@ type Profile @key(fields: "email") {
   updatedAt: DateTime! @updatedAt
   events: [Event]! @relation(name: "Events")
   activities: [Participant]! @relation(name: "Profile")
+  chats: [Chat] @relation(name: "SentMessages" onDelete: CASCADE)
+  receivedChats: [Chat] @relation(name: "ReceivedMessages" onDelete: CASCADE)
+  chatRooms: [ChatRoom] @relation(name: "ChatRooms" onDelete: CASCADE)
 }
 
 type Event {
@@ -45,11 +48,27 @@ type Activity {
   event: Event! @relation(name: "Activity")
   participants: [Participant]! @relation(name: "Participant", onDelete: CASCADE)
 }
+
 type Participant {
   id: ID! @id
   activity: Activity! @relation(name: "Participant")
   profile: Profile @relation(name: "Profile")
   role: Role @relation(name: "Role", onDelete: CASCADE)
+}
+
+type Chat {
+  id: ID! @id
+  from: Profile! @relation(name: "SentMessages")
+  recipient: [Profile]! @relation(name: "ReceivedMessages")
+  message: String!
+  createdAt: DateTime! @createdAt
+  room: ChatRoom! @relation(name: "Room")
+}
+
+type ChatRoom {
+  id: ID! @id
+  participants: [Profile]! @relation(name: "ChatRooms")
+  messages: [Chat]! @relation(name: "Room", onDelete: CASCADE)
 }
 
 enum Role {
