@@ -11,6 +11,8 @@ const Activity = require('./Activity');
 const Profile = require('./Profile');
 const Event = require('./Event');
 const Participant = require('./Participant');
+const Chat = require('./Chat');
+const ChatRoom = require('./ChatRoom');
 
 const resolvers = {
   Query,
@@ -19,6 +21,8 @@ const resolvers = {
   Profile,
   Event,
   Participant,
+  Chat,
+  ChatRoom
 };
 
 module.exports = resolvers;
