@@ -1,12 +1,5 @@
 const { PubSub, withFilter } = require('graphql-subscriptions');
-const {
-  CHAT_CREATED,
-  CHAT_UPDATED,
-  CHAT_DELETED,
-  CHATROOM_CREATED,
-  CHATROOM_UPDATED,
-  CHATROOM_DELETED
-} = require('./variables');
+const { AuthenticationError } = require('apollo-server'); 
 
 const pubsub = new PubSub();
 
@@ -17,24 +10,23 @@ const pubsub = new PubSub();
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
-const chatSubscription = async (_, args, context) => {
+const chat = async (_, args, context) => {
   const currentUser = context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
   }
   context.logger.debug('Subscription.chat: %O', currentUser);
+  // const newChat = await context.prisma.chat(args);
 
-  // Subscribe to a new chat
-  withFilter(
-    () => pubsub.asyncIterator(CHAT_CREATED),
-    newChat = await context.prisma.chat(args)
+  const newChat = await withFilter(
+    () => pubsub.asyncIterator('CREATED')
   )
 
-  return newChat;
+  // Subscribe to a new chat
+  return newChat
 };
 
 module.exports = {
-  NEW_CHANNEL_MESSAGE,
-  chatSubscription
+  chat
 }

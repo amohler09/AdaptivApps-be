@@ -13,10 +13,12 @@ const Event = require('./Event');
 const Participant = require('./Participant');
 const Chat = require('./Chat');
 const ChatRoom = require('./ChatRoom');
+const Subscription = require('./Subscription');
 
 const resolvers = {
   Query,
   Mutation,
+  Subscription,
   Activity,
   Profile,
   Event,

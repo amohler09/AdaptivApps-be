@@ -2,14 +2,6 @@
 
 const { AuthenticationError } = require('apollo-server');
 const { PubSub } = require('graphql-subscriptions');
-const {
-  CHAT_CREATED,
-  CHAT_UPDATED,
-  CHAT_DELETED,
-  CHATROOM_CREATED,
-  CHATROOM_UPDATED,
-  CHATROOM_DELETED
-} = require('./variables');
 
 const pubsub = new PubSub();
 
@@ -264,7 +256,7 @@ const createChat = async (_, args, context) => {
   // Creates a chat
   const chat = await context.prisma.createChat(args.data);
 
-  pubsub.publish(CHAT_CREATED, args);
+  pubsub.publish('CREATED', chat);
 
   return chat;
 };

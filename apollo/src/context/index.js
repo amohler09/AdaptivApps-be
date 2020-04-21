@@ -47,10 +47,7 @@ const jwksClient = JwksClient({
 });
 
 // Creating the context object
-const context = async ({ req, connection }) => {
-  if (connection) {
-    return connection.context
-  } else {
+const context = async ({ req }) => {
   // Grab the 'Authorization' token from the header
   const token = req.header('Authorization');
   if (typeof token != 'string' || token == 'null' || token == '') {
@@ -98,8 +95,7 @@ const context = async ({ req, connection }) => {
 
     // Pack the user, Prisma client and Winston logger into the context
     return { user: authenticatedUser, prisma, logger: logger };
-  }
-};
+  };
 
 // This function is called by the JWT verifier, which sends the JWT header and a
 // callback to return the public key used for verifying the JWT signature

@@ -36,4 +36,5 @@
 # import Mutation.updateChatRoom from "generated/prisma.graphql"
 # import Mutation.deleteChatRoom from "generated/prisma.graphql"
 
-# import Subscription.chat from "generated/prisma.graphql"
+# import Subscription.chat from "./generated/prisma.graphql"
+# import Chat, ChatSubscriptionPayload from "./generated/prisma.graphql"
