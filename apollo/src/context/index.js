@@ -47,7 +47,10 @@ const jwksClient = JwksClient({
 });
 
 // Creating the context object
-const context = async ({ req }) => {
+const context = async ({ req, connection }) => {
+  if (connection) {
+    return connection.context
+  } else {
   // Grab the 'Authorization' token from the header
   const token = req.header('Authorization');
   if (typeof token != 'string' || token == 'null' || token == '') {
@@ -58,43 +61,44 @@ const context = async ({ req }) => {
     throw new AuthenticationError('Not authorized');
   }
 
-  // Decode the JWT so we can get the header
-  logger.debug('Decoding token: %s', token);
-  let tokenHeader;
-  try {
-    tokenHeader = jwt.decode(token, { complete: true }).header;
-  } catch (err) {
-    logger.error('Error while decoding token: %O', token);
-    throw new AuthenticationError('Not authorized');
+    // Decode the JWT so we can get the header
+    logger.debug('Decoding token: %s', token);
+    let tokenHeader;
+    try {
+      tokenHeader = jwt.decode(token, { complete: true }).header;
+    } catch (err) {
+      logger.error('Error while decoding token: %O', token);
+      throw new AuthenticationError('Not authorized');
+    }
+
+    // Get the public key from the OAuth endpoint
+    logger.debug('Retrieving public key used for JWT validation');
+    const pubKey = await getKey(tokenHeader);
+
+    // Verify the JWT
+    logger.debug('Verifying and decoding JWT');
+    const decodedJWT = jwt.verify(token, pubKey, jwtVerifyOptions);
+
+    // Create the User using the information from the JWT
+    logger.debug('Creating User using decoded JWT: %O', decodedJWT);
+    const authenticatedUser = new User(
+      (id = decodedJWT['sub']),
+      (name = decodedJWT['name']),
+      (email = decodedJWT['email']),
+      (groups = decodedJWT['http://adaptivapps.com/roles'])
+    );
+
+    // Don't let anyone past this point if they aren't authenticated
+    if (typeof authenticatedUser === 'undefined' || authenticatedUser == null) {
+      logger.error('Unable to authenticate user: %O', req.header);
+      throw new AuthenticationError('Not authorized');
+    }
+
+    logger.debug('Current user: %O', authenticatedUser);
+
+    // Pack the user, Prisma client and Winston logger into the context
+    return { user: authenticatedUser, prisma, logger: logger };
   }
-
-  // Get the public key from the OAuth endpoint
-  logger.debug('Retrieving public key used for JWT validation');
-  const pubKey = await getKey(tokenHeader);
-
-  // Verify the JWT
-  logger.debug('Verifying and decoding JWT');
-  const decodedJWT = jwt.verify(token, pubKey, jwtVerifyOptions);
-
-  // Create the User using the information from the JWT
-  logger.debug('Creating User using decoded JWT: %O', decodedJWT);
-  const authenticatedUser = new User(
-    (id = decodedJWT['sub']),
-    (name = decodedJWT['name']),
-    (email = decodedJWT['email']),
-    (groups = decodedJWT['http://adaptivapps.com/roles'])
-  );
-
-  // Don't let anyone past this point if they aren't authenticated
-  if (typeof authenticatedUser === 'undefined' || authenticatedUser == null) {
-    logger.error('Unable to authenticate user: %O', req.header);
-    throw new AuthenticationError('Not authorized');
-  }
-
-  logger.debug('Current user: %O', authenticatedUser);
-
-  // Pack the user, Prisma client and Winston logger into the context
-  return { user: authenticatedUser, prisma, logger: logger };
 };
 
 // This function is called by the JWT verifier, which sends the JWT header and a
