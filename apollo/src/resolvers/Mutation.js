@@ -257,6 +257,25 @@ const createChat = async (_, args, context) => {
 };
 
 /**
+ * @param {{ data: import('../generated/prisma-client').ChatUpdateInput, where: import('../generated/prisma-client').ChatWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const updateChat = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.updateChat: %O', currentUser);
+  // Updates a chat
+  const chat = await context.prisma.updateChat(args);
+
+  return chat;
+};
+
+/**
  * @param {{ where: import('../generated/prisma-client').ChatWhereUniqueInput! }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
@@ -295,6 +314,25 @@ const createChatRoom = async (_, args, context) => {
 };
 
 /**
+ * @param {{ data: import('../generated/prisma-client').ChatRoomUpdateInput, where: import('../generated/prisma-client').ChatRoomWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const updateChatRoom = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.updateChatRoom: %O', currentUser);
+  // Updates a chat room
+  const room = await context.prisma.updateChatRoom(args);
+
+  return room;
+};
+
+/**
  * @param {{ where: import('../generated/prisma-client').ChatRoomWhereUniqueInput! }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
@@ -327,7 +365,9 @@ module.exports = {
   updateParticipant,
   deleteParticipant,
   createChat,
+  updateChat,
   deleteChat,
   createChatRoom,
+  updateChatRoom,
   deleteChatRoom
 };

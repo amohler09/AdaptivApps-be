@@ -30,6 +30,8 @@
 # import Mutation.deleteParticipant from "generated/prisma.graphql"
 
 # import Mutation.createChat from "generated/prisma.graphql"
+# import Mutation.updateChat from "generated/prisma.graphql"
 # import Mutation.deleteChat from "generated/prisma.graphql"
 # import Mutation.createChatRoom from "generated/prisma.graphql"
+# import Mutation.updateChatRoom from "generated/prisma.graphql"
 # import Mutation.deleteChatRoom from "generated/prisma.graphql"
