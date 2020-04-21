@@ -59,16 +59,15 @@ type Participant {
 type Chat {
   id: ID! @id
   from: Profile! @relation(name: "SentMessages")
-  recipient: [Profile]! @relation(name: "ReceivedMessages")
   message: String!
   createdAt: DateTime! @createdAt
-  room: ChatRoom! @relation(name: "Room")
+  room: ChatRoom @relation(name: "Room")
 }
 
 type ChatRoom {
   id: ID! @id
   participants: [Profile]! @relation(name: "ChatRooms")
-  messages: [Chat]! @relation(name: "Room", onDelete: CASCADE)
+  chats: [Chat] @relation(name: "Room", onDelete: CASCADE)
 }
 
 enum Role {

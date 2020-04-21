@@ -2,11 +2,11 @@ function participants(parent, args, context) {
   return context.prisma.activity({ id: parent.id }).participants();
 };
 
-function messages(parent, args, context) {
-  return context.prisma.activity({ id: parent.id }).messages();
+function chats(parent, args, context) {
+  return context.prisma.activity({ id: parent.id }).chats();
 };
 
 module.exports = {
   participants,
-  messages
+  chats
 };
