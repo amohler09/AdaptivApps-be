@@ -255,7 +255,12 @@ const createChat = async (_, args, context) => {
   // Creates a chat
   const chat = await context.prisma.createChat(args.data);
 
-  pubsub.publish('CREATED', chat);
+  pubsub.publish('CREATED', {
+    chat: {
+      mutation: 'CREATED',
+      node: chat
+    }
+  });
 
   return chat;
 };
