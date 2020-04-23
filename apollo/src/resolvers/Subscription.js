@@ -16,14 +16,8 @@ const chat = {
       throw new AuthenticationError('Must be authenticated')
     }
     context.logger.debug('Subscription.chat: %O', context.user)
-    // const newChat = await context.prisma.chat(args);
 
-    const newChat = await withFilter(
-      () => pubsub.asyncIterator('CREATED')
-    )
-
-    // Subscribe to a new chat
-    return newChat
+    return pubsub.asyncIterator('CREATED')
   }
 }
 

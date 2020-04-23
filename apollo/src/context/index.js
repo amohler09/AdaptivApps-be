@@ -76,7 +76,7 @@ exports.context = async ({ req, connection }) => {
     throw new AuthenticationError('Not authorized')
   }
 
-  logger.debug('Current user: %O', user)
+  // logger.debug('Current user: %O', user)
 
   // Pack the user, Prisma client and Winston logger into the context
   return { user, prisma, logger }
@@ -85,8 +85,8 @@ exports.context = async ({ req, connection }) => {
 exports.onConnect = (connectionParams, _webSocket) => {
   // logger.debug('Subscription onConnect: %O', connectionParams)
 
-  if (connectionParams.authorization) {
-    return validateJWT(connectionParams.authorization)
+  if (connectionParams.Authorization) {
+    return validateJWT(connectionParams.Authorization)
       .then(user => {
         return { user, prisma, logger }
       })
