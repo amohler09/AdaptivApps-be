@@ -9,7 +9,7 @@ const pubsub = new PubSub()
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
-const chat = {
+const newChat = {
   subscribe: async (_, args, context) => {
     if (typeof context.user === 'undefined') {
       context.logger.error('API called by unauthenticated user')
@@ -17,10 +17,10 @@ const chat = {
     }
     context.logger.debug('Subscription.chat: %O', context.user)
 
-    return pubsub.asyncIterator('CREATED')
+    return pubsub.asyncIterator(['CREATED', 'UPDATED', 'DELETED'])
   }
 }
 
 module.exports = {
-  chat
+  newChat
 }
