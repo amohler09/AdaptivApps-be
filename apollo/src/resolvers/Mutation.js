@@ -215,6 +215,24 @@ const updateParticipant = async (_, args, context) => {
 
   return participant;
 };
+/**
+ * @param {{ where: import('../generated/prisma-client').ParticipantWhereUniqueInput, create: import('../generated/prisma-client').ParticipantCreateInput, update: import('../generated/prisma-client').ParticipantUpdateInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const upsertParticipant = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.upsertParticipant: %O', currentUser);
+  // Upserts an participant with args passed in
+  const participant = await context.prisma.upsertParticipant(args);
+
+  return participant;
+};
 
 /**
  * @param {{ where: import('../generated/prisma-client').ParticipantWhereUniqueInput }} args
@@ -247,5 +265,6 @@ module.exports = {
   deleteActivity,
   createParticipant,
   updateParticipant,
+  upsertParticipant,
   deleteParticipant,
 };
