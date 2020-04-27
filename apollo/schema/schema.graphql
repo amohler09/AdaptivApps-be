@@ -24,4 +24,5 @@
 
 # import Mutation.createParticipant from "generated/prisma.graphql"
 # import Mutation.updateParticipant from "generated/prisma.graphql"
+# import Mutation.upsertParticipant from "generated/prisma.graphql"
 # import Mutation.deleteParticipant from "generated/prisma.graphql"

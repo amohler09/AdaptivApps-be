@@ -1,5 +1,3 @@
-After having prismatopia set up, run `make local-prisma-deploy` to generate database
-
 _For Windows 10 Pro Users: run 'docker-compose up --build'_
 
 # Prismatopia
