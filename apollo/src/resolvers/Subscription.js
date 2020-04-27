@@ -17,7 +17,7 @@ function newChatSubscribe(parent, args, context, info) {
   }
   context.logger.debug('Subscription.chat: %O', context.user)
 
-  return context.prisma.$subscribe.chat({ mutation_in: ['CREATED']})
+  return context.prisma.$subscribe.chat({ mutation_in: ['CREATED', 'UPDATED', 'DELETED']})
 }
 
 const chat = {
@@ -25,8 +25,8 @@ const chat = {
   resolve: payload => {
     return payload
   }
-
 }
+
 module.exports = {
   chat
 }

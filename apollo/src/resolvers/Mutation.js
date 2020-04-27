@@ -272,8 +272,6 @@ const updateChat = async (_, args, context) => {
   // Updates a chat
   const chat = await context.prisma.updateChat(args);
 
-  pubsub.publish('UPDATED', chat);
-
   return chat;
 };
 
@@ -292,8 +290,6 @@ const deleteChat = async (_, args, context) => {
   context.logger.debug('Mutation.deleteChat: %O', currentUser);
   // Deletes a chat
   const chat = await context.prisma.deleteChat(args.where);
-
-  pubsub.publish('DELETED', chat);
 
   return chat;
 };
@@ -314,8 +310,6 @@ const createChatRoom = async (_, args, context) => {
   // Creates a chat room
   const room = await context.prisma.createChatRoom(args.data);
 
-  pubsub.publish('CREATED', room);
-
   return room;
 };
 
@@ -335,8 +329,6 @@ const updateChatRoom = async (_, args, context) => {
   // Updates a chat room
   const room = await context.prisma.updateChatRoom(args);
 
-  pubsub.publish('UPDATED', room);
-
   return room;
 };
 
@@ -355,8 +347,6 @@ const deleteChatRoom = async (_, args, context) => {
   context.logger.debug('Mutation.deleteChatRoom: %O', currentUser);
   // Deletes a chat room
   const room = await context.prisma.deleteChatRoom(args.where);
-
-  pubsub.publish('DELETED', room);
 
   return room;
 };
