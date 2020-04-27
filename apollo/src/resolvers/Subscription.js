@@ -9,6 +9,7 @@ const { AuthenticationError } = require('apollo-server') 
  * @returns { Promise }
  */
 
+
 function newChatSubscribe(parent, args, context, info) {
   if (typeof context.user === 'undefined') {
     context.logger.error('API called by unauthenticated user')
@@ -24,8 +25,8 @@ const chat = {
   resolve: payload => {
     return payload
   }
-}
 
+}
 module.exports = {
   chat
 }
