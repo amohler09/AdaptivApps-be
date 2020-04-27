@@ -158,10 +158,10 @@ apollo-push: env-APOLLO_CONTAINER_IMAGE apollo-build
 	 cd apollo && docker push $${APOLLO_CONTAINER_IMAGE}
 
 apollo-token:
-	export $$(cat .env | xargs)																																								  && 			\
+	@export $$(cat .env | xargs)																																								  && 			\
 	 printf "$(OK_COLOR)"																																												&& 			\
 	 printf "\n%s\n" "======================================================================================"		&& 			\
-	 printf "%s\n"   "= Grabbing token from: $${OAUTH_TOKEN_ENDPOINT}"																					&& 			\
+	 printf "%s\n"   "= Grabbing token from: $${APOLLO_TOKEN_ENDPOINT}"																					&& 			\
 	 printf "%s\n"   "======================================================================================"		&& 			\
 	 printf "$(NO_COLOR)"																																												&& 			\
 	 curl --request POST																																																\

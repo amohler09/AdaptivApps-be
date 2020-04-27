@@ -10,6 +10,9 @@
 # import Query.participant from "generated/prisma.graphql"
 # import Query.participants from "generated/prisma.graphql"
 
+# import Query.chats from "generated/prisma.graphql"
+# import Query.chatRooms from "generated/prisma.graphql"
+
 # import Mutation.createProfile from "generated/prisma.graphql"
 # import Mutation.updateProfile from "generated/prisma.graphql"
 # import Mutation.deleteProfile from "generated/prisma.graphql"
@@ -25,3 +28,16 @@
 # import Mutation.createParticipant from "generated/prisma.graphql"
 # import Mutation.updateParticipant from "generated/prisma.graphql"
 # import Mutation.deleteParticipant from "generated/prisma.graphql"
+
+# import Mutation.createChat from "generated/prisma.graphql"
+# import Mutation.updateChat from "generated/prisma.graphql"
+# import Mutation.deleteChat from "generated/prisma.graphql"
+# import Mutation.createChatRoom from "generated/prisma.graphql"
+# import Mutation.updateChatRoom from "generated/prisma.graphql"
+# import Mutation.deleteChatRoom from "generated/prisma.graphql"
+
+# import Subscription.chat from "./generated/prisma.graphql"
+# import Subscription.chatRoom from "./generated/prisma.graphql"
+# import ChatSubscriptionPayload from "./generated/prisma.graphql"
+# import ChatRoomSubscriptionPayload from "./generated/prisma.graphql"
+
