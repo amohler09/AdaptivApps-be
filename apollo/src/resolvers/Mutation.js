@@ -1,9 +1,9 @@
 //@ts-check
 
 const { AuthenticationError } = require('apollo-server');
-const { PubSub } = require('graphql-subscriptions');
 
-const pubsub = new PubSub();
+
+
 
 // --------------------------------------------------------------------- Profile Mutations ---------------------------------------------------------------------
 
@@ -255,8 +255,6 @@ const createChat = async (_, args, context) => {
   context.logger.debug('Mutation.createChat: %O', currentUser);
   // Creates a chat
   const chat = await context.prisma.createChat(args.data);
-
-  pubsub.publish('CREATED', chat);
 
   return chat;
 };
