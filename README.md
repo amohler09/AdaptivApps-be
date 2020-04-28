@@ -65,6 +65,8 @@ TEST_OAUTH_CLIENT_SECRET=<Client secret for the client ID above: e.g. "sldkmai98
 APOLLO_CONTAINER_IMAGE=<When you're ready to push your Apollo server to the cloud, this is the name of the image it will have in Docker Hub: e.g. "lambdaschoollabs/prismatopia-apollo:latest">
 ```
 
+``
+
 ### Makefile
 
 First, it is very important to note that there is a Makefile in the root directly that is intended to provide all of the controls that you'll need for both local development and AWS operations.
