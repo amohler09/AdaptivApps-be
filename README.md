@@ -64,6 +64,7 @@ TEST_OAUTH_CLIENT_SECRET=<Client secret for the client ID above: e.g. "sldkmai98
 
 APOLLO_CONTAINER_IMAGE=<When you're ready to push your Apollo server to the cloud, this is the name of the image it will have in Docker Hub: e.g. "lambdaschoollabs/prismatopia-apollo:latest">
 ```
+``
 
 ### Makefile
 
