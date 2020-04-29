@@ -13,7 +13,7 @@ const { AuthenticationError } = require('apollo-server');
  * @returns { Promise }
  */
 const profile = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -32,7 +32,7 @@ const profile = async (_, args, context) => {
  * @returns { Promise }
  */
 const profiles = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -53,7 +53,7 @@ const profiles = async (_, args, context) => {
  * @returns { Promise }
  */
 const event = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -71,7 +71,7 @@ const event = async (_, args, context) => {
  * @returns { Promise }
  */
 const events = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -92,7 +92,7 @@ const events = async (_, args, context) => {
  * @returns { Promise }
  */
 const activity = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -111,7 +111,7 @@ const activity = async (_, args, context) => {
  * @returns { Promise }
  */
 const activities = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -132,7 +132,7 @@ const activities = async (_, args, context) => {
  * @returns { Promise }
  */
 const participant = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -151,7 +151,7 @@ const participant = async (_, args, context) => {
  * @returns { Promise }
  */
 const participants = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -172,7 +172,7 @@ const participants = async (_, args, context) => {
  * @returns { Promise }
  */
 const chats = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -191,7 +191,7 @@ const chats = async (_, args, context) => {
  * @returns { Promise }
  */
 const chatRooms = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -204,7 +204,6 @@ const chatRooms = async (_, args, context) => {
   return chatRooms;
 };
 
-
 module.exports = {
   profile,
   profiles,
@@ -215,5 +214,5 @@ module.exports = {
   participants,
   participant,
   chats,
-  chatRooms
+  chatRooms,
 };
