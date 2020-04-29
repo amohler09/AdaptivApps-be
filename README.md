@@ -173,7 +173,7 @@ Sweet! Now, you need to deploy something to Prisma, which starts out empty.
 
 _For Windows 10 Pro Users: run 'prisma deploy'_
 
-### Play with Prisma
+### Play with Prisma!
 
 1. Generate a token: `make local-prisma-deploy`
 2. Open the Prisma Admin: <http://localhost:7000/_admin>
