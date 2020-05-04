@@ -84,10 +84,10 @@ exports.context = async ({ req, connection }) => {
 };
 
 exports.onConnect = (connectionParams, _webSocket) => {
-  // logger.debug('Subscription onConnect: %O', connectionParams)
+  logger.debug('Subscription onConnect: %O', connectionParams)
 
-  if (connectionParams.Authorization) {
-    return validateJWT(connectionParams.Authorization).then(user => {
+  if (connectionParams.authToken) {
+    return validateJWT(connectionParams.authToken).then(user => {
       return { user, prisma, logger };
     });
   }
