@@ -1,7 +1,0 @@
-ApplicationName=angelcitysports
-ApplicationDomainNamespace=angelcitiesevents.com
-
-ApolloServicePort=8000
-PrismaServicePort=8000
-
-LogLevel=debug
