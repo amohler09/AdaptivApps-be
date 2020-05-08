@@ -204,6 +204,28 @@ const chatRooms = async (_, args, context) => {
   return chatRooms;
 };
 
+// --------------------------------------------------------------------- Announcement Query ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').AnnouncementWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const announcements = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.announcements: %O', currentUser);
+
+  // Returns all chats
+  const announcements = await context.prisma.announcements(args);
+
+  return announcements;
+};
+
+
 module.exports = {
   profile,
   profiles,
@@ -215,4 +237,5 @@ module.exports = {
   participant,
   chats,
   chatRooms,
+  announcements
 };

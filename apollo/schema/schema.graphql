@@ -30,7 +30,6 @@
 # import Mutation.upsertParticipant from "generated/prisma.graphql"
 # import Mutation.deleteParticipant from "generated/prisma.graphql"
 
-
 # import Mutation.createChat from "generated/prisma.graphql"
 # import Mutation.updateChat from "generated/prisma.graphql"
 # import Mutation.deleteChat from "generated/prisma.graphql"
@@ -43,3 +42,4 @@
 # import ChatSubscriptionPayload from "./generated/prisma.graphql"
 # import ChatRoomSubscriptionPayload from "./generated/prisma.graphql"
 
+# import Query.announcements from "generated/prisma.graphql"
