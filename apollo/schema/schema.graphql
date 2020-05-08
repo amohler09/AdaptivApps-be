@@ -43,3 +43,10 @@
 # import ChatRoomSubscriptionPayload from "./generated/prisma.graphql"
 
 # import Query.announcements from "generated/prisma.graphql"
+
+# import Mutation.createAnnouncement from "generated/prisma.graphql"
+# import Mutation.updateAnnouncement from "generated/prisma.graphql"
+# import Mutation.deleteAnnouncement from "generated/prisma.graphql"
+
+# import Subscription.announcement from "./generated/prisma.graphql"
+# import AnnouncementSubscriptionPayload from "./generated/prisma.graphql"
