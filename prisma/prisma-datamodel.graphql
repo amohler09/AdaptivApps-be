@@ -15,6 +15,7 @@ type Profile @key(fields: "email") {
   chats: [Chat] @relation(name: "SentMessages" onDelete: CASCADE)
   receivedChats: [Chat] @relation(name: "ReceivedMessages" onDelete: CASCADE)
   chatRooms: [ChatRoom] @relation(name: "ChatRooms" onDelete: CASCADE)
+  announcements: [Announcement] @relation(name: "Announcements")
 }
 
 type Event {
@@ -68,6 +69,15 @@ type ChatRoom {
   id: ID! @id
   participants: [Profile]! @relation(name: "ChatRooms")
   chats: [Chat] @relation(name: "Room", onDelete: CASCADE)
+}
+
+type Announcement {
+  id: ID! @id
+  participants: [Profile]! @relation(name: "Announcements")
+  title: String!
+  message: String!
+  createdAt: DateTime! @createdAt
+  isAnnouncementRoom: Boolean! 
 }
 
 enum Role {
