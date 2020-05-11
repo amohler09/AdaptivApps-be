@@ -68,6 +68,7 @@ const chatRoom = {
   }
 }
 
+// ANNOUNCEMENT SUBSCRIPTION RETURN
 const announcement = {
   subscribe: newAnnouncementSubscribe,
   resolve: payload => {
