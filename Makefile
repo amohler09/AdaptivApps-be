@@ -492,3 +492,10 @@ aws-apollo-update-service: aws-env-banner
 	 printf "$(NO_COLOR)"																																												&& \
 	 export APOLLO_SERVICE_ARN=$(AWS_APOLLO_SERVICE_ARN) 																												&& \
 	 aws ecs update-service --cluster $(APPLICATION_NAME)-$(ENVIRONMENT_NAME) --service "$${APOLLO_SERVICE_ARN}" --force-new-deployment
+
+aws-deploy-all: aws-prisma-deploy apollo-push aws-apollo-update-service
+	@printf "$(OK_COLOR)"																																												&& \
+	 printf "\n%s\n" "======================================================================================"		&& \
+	 printf "%s\n"   "= AWS Prisma and Apollo updated																														&& \
+	 printf "%s"     "======================================================================================"		&& \
+	 printf "$(NO_COLOR)"
