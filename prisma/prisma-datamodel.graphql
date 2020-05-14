@@ -82,7 +82,8 @@ type Announcement {
 
 type Notification {
   id: ID! @id
-  label: String!
+  label: String
+  isNotification: Boolean!
 }
 
 enum Role {
