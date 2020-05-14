@@ -177,10 +177,10 @@ _For Windows 10 Pro Users: run 'prisma deploy'_
 
 1. Generate a token: `make local-prisma-deploy`
 2. Open the Prisma Admin: <http://localhost:7000/_admin>
-3. Add the token (TBD)
+3. Add the token (Using the `HTTP Headers` in the bottom left corner. The token goes under an `Authorization` header)
 4. See the data
 5. Open the Prisma GraphQL Playground: <http://localhost:7000/>
-6. Add the token (TBD)
+6. Add the token (Using the `HTTP Headers` in the bottom left corner. The token goes under an `Authorization` header)
 7. See the data
 
 Hooray! Your Prisma service is talking to Postgres!
@@ -189,7 +189,7 @@ Hooray! Your Prisma service is talking to Postgres!
 
 1. Generate a token: `make apollo-token`
 2. Open the Apollo GraphQL Playground: <http://localhost:8000/>
-3. Add the token (TBD)
+3. Add the token (Using the `HTTP Headers` in the bottom left corner. The token goes under an `Authorization` header)
 4. See the data
 
 Hooray! Your Apollo service is talking to Prisma which is talking to Postgres!
@@ -340,7 +340,21 @@ If you're playing along at home, you may notice that Apollo updates whenever you
 
 Now that you've developed your GraphQL API locally, you're ready to push to AWS and run this thing in production. Prismatopia has you covered there as well.
 
-TBDocumented
+To push the BE up to AWS, make sure your ENV variables correspond with the production account. The following need to be updated:
+
+`APOLLO_TOKEN_ENDPOINT`
+`APOLLO_CLIENT_ID`
+`APOLLO_CLIENT_SECRET`
+
+After updating, use the following commands for deployment:
+
+`make aws-update`
+You might be prompted to login to Docker here. You might also be prompted to enter your Access Key and Secret Key - you will need to login to AWS and generate a new Access Key. To access AWS, please reach out to your Section Lead for IAM access. The region, when prompted, is `us-east-1`.
+
+`make apollo-push`
+To get the changes to the Schema generated in both Prisma and Apollo
+
+`make aws-apollo-update-service`
 
 ## More Details
 
