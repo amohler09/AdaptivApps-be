@@ -50,3 +50,11 @@
 
 # import Subscription.announcement from "./generated/prisma.graphql"
 # import AnnouncementSubscriptionPayload from "./generated/prisma.graphql"
+
+# import Query.notifications from "generated/prisma.graphql"
+# import Mutation.createNotification from "generated/prisma.graphql"
+# import Mutation.updateNotification from "generated/prisma.graphql"
+# import Mutation.deleteNotification from "generated/prisma.graphql"
+
+# import Subscription.notification from "./generated/prisma.graphql"
+# import NotificationSubscriptionPayload from "./generated/prisma.graphql"

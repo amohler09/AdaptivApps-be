@@ -428,6 +428,66 @@ const deleteAnnouncement = async (_, args, context) => {
   return announcement;
 };
 
+// --------------------------------------------------------------------- Notifications Mutations ---------------------------------------------------------------------
+
+/**
+ * @param {{ data: import('../generated/prisma-client').NotificationCreateInput! }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const createNotification = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.createNotification: %O', currentUser);
+  // Creates a notification
+  const notification = await context.prisma.createNotification(args.data);
+
+  return notification;
+};
+
+/**
+ * @param {{ data: import('../generated/prisma-client').NotificationUpdateInput!, where: import('../generated/prisma-client').NotificationWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const updateNotification = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.updateNotification: %O', currentUser);
+  // Updates a notification
+  const notification = await context.prisma.updateNotification(args);
+
+  return notification;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').NotificationWhereUniqueInput! }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const deleteNotification = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.deleteNotification: %O', currentUser);
+  // Deletes a notification
+  const notification = await context.prisma.deleteNotification(args.where);
+
+  return notification;
+};
+
+
 module.exports = {
   createProfile,
   updateProfile,
@@ -450,5 +510,8 @@ module.exports = {
   deleteChatRoom,
   createAnnouncement,
   updateAnnouncement,
-  deleteAnnouncement
+  deleteAnnouncement, 
+  createNotification, 
+  updateNotification,
+  deleteNotification
 };

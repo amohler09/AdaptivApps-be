@@ -80,6 +80,12 @@ type Announcement {
   isAnnouncementRoom: Boolean! 
 }
 
+type Notification {
+  id: ID! @id
+  label: String
+  isNotification: Boolean!
+}
+
 enum Role {
   ATHLETE
   VOLUNTEER
