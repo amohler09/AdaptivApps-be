@@ -51,6 +51,23 @@ function newAnnouncementSubscribe(parent, args, context, info) {
   return context.prisma.$subscribe.announcement({ mutation_in: ['CREATED', 'UPDATED', 'DELETED']})
 }
 
+// --------------------------------------------------------------------- Notification Subscription ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').NotificationSubscriptionWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+function newNotificationSubscribe(parent, args, context, info) {
+  if (typeof context.user === 'undefined') {
+    context.logger.error('API called by unauthenticated user')
+    throw new AuthenticationError('Must be authenticated')
+  }
+  context.logger.debug('Subscription.notification: %O', context.user)
+
+  return context.prisma.$subscribe.notification({ mutation_in: ['CREATED', 'UPDATED', 'DELETED']})
+}
+
 
 // CHAT SUBSCRIPTION RETURN
 const chat = {
@@ -76,8 +93,17 @@ const announcement = {
   }
 }
 
+// NOTIFICATIONS SUBSCRIPTION RETURN
+const notification = {
+  subscribe: newNotificationSubscribe,
+  resolve: payload => {
+    return payload
+  }
+}
+
 module.exports = {
   chat,
   chatRoom,
-  announcement
+  announcement, 
+  notification
 }

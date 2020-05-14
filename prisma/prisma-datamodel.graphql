@@ -78,6 +78,12 @@ type Announcement {
   message: String!
   createdAt: DateTime! @createdAt
   isAnnouncementRoom: Boolean! 
+  notifications: [Notification]!
+}
+
+type Notification {
+  id: ID! @id
+  label: String!
 }
 
 enum Role {
