@@ -177,10 +177,10 @@ _For Windows 10 Pro Users: run 'prisma deploy'_
 
 1. Generate a token: `make local-prisma-deploy`
 2. Open the Prisma Admin: <http://localhost:7000/_admin>
-3. Add the token (TBD)
+3. Add the token (Using the `HTTP Headers` in the bottom left corner. The token goes under an `Authorization` header)
 4. See the data
 5. Open the Prisma GraphQL Playground: <http://localhost:7000/>
-6. Add the token (TBD)
+6. Add the token (Using the `HTTP Headers` in the bottom left corner. The token goes under an `Authorization` header)
 7. See the data
 
 Hooray! Your Prisma service is talking to Postgres!
@@ -189,7 +189,7 @@ Hooray! Your Prisma service is talking to Postgres!
 
 1. Generate a token: `make apollo-token`
 2. Open the Apollo GraphQL Playground: <http://localhost:8000/>
-3. Add the token (TBD)
+3. Add the token (Using the `HTTP Headers` in the bottom left corner. The token goes under an `Authorization` header)
 4. See the data
 
 Hooray! Your Apollo service is talking to Prisma which is talking to Postgres!
