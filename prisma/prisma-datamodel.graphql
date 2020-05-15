@@ -16,6 +16,7 @@ type Profile @key(fields: "email") {
   receivedChats: [Chat] @relation(name: "ReceivedMessages" onDelete: CASCADE)
   chatRooms: [ChatRoom] @relation(name: "ChatRooms" onDelete: CASCADE)
   announcements: [Announcement] @relation(name: "Announcements")
+  notifications: [Notification] @relation(name: "Notifications", onDelete: CASCADE)
 }
 
 type Event {
@@ -82,8 +83,10 @@ type Announcement {
 
 type Notification {
   id: ID! @id
-  label: String
-  isNotification: Boolean!
+  profile: Profile! @relation(name: "Notifications")
+  isAnnouncementNotification: Boolean
+  isChatNotification: Boolean
+  isChatRoomNotification: Boolean
 }
 
 enum Role {

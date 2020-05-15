@@ -19,10 +19,15 @@ function chatRooms(parent, args, context) {
   return context.prisma.profile({ email: parent.email }).chatRooms();
 };
 
+function notifications(parent, args, context) {
+  return context.prisma.profile({ email: parent.email }).notifications();
+}
+
 module.exports = {
   activities,
   events,
   chats,
   receivedChats,
-  chatRooms
+  chatRooms,
+  notifications
 };
