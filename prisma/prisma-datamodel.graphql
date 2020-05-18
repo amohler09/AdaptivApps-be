@@ -64,6 +64,7 @@ type Chat {
   message: String!
   createdAt: DateTime! @createdAt
   room: ChatRoom @relation(name: "Room")
+  notification: [Notification] @relation(name: "ChatNotification")
 }
 
 type ChatRoom {
@@ -79,14 +80,15 @@ type Announcement {
   message: String!
   createdAt: DateTime! @createdAt
   isAnnouncementRoom: Boolean! 
+  notification: [Notification] @relation(name: "AnnouncementNotification")
 }
 
 type Notification {
   id: ID! @id
-  profile: Profile! @relation(name: "Notifications")
-  isAnnouncementNotification: Boolean
-  isChatNotification: Boolean
-  isChatRoomNotification: Boolean
+  label: String!
+  profile: [Profile]! @relation(name: "Notifications")
+  announcement: Announcement @relation(name: "AnnouncementNotification")
+  chat: Chat @relation(name: "ChatNotification")
 }
 
 enum Role {
