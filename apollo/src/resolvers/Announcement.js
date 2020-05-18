@@ -3,10 +3,10 @@ function participants (parent, args, context) {
 };
 
 function notification (parent, args, context) {
-      return context.prisma.announcement({ id: parent.id }).notification()
+  return context.prisma.announcement({ id: parent.id }).notification()
 };
-  
+
 module.exports = {
-  participants, 
+  participants,
   notification
 }

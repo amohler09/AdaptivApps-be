@@ -35,7 +35,7 @@ const updateProfile = async (_, args, context) => {
     context.logger.error('API called by unauthenticated user.')
     throw new AuthenticationError('Must be authenticated')
   }
-  context.logger.debug('Mutation.updateProfile: %O', currentUser);
+  context.logger.debug('Mutation.updateProfile: %O', currentUser)
   // Updates a profile with args passed in
   const profile = await context.prisma.updateProfile(args)
 
@@ -486,7 +486,6 @@ const deleteNotification = async (_, args, context) => {
   return notification
 }
 
-
 module.exports = {
   createProfile,
   updateProfile,
@@ -509,8 +508,8 @@ module.exports = {
   deleteChatRoom,
   createAnnouncement,
   updateAnnouncement,
-  deleteAnnouncement, 
-  createNotification, 
+  deleteAnnouncement,
+  createNotification,
   updateNotification,
   deleteNotification
 }
