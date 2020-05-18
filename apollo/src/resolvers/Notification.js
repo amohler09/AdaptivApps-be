@@ -1,7 +1,17 @@
 function profile(parent, args, context) {
-    return context.prisma.chat({ id: parent.id }).profile();
+    return context.prisma.notification({ id: parent.id }).profile();
   };
+
+function announcement(parent, __, context) {
+  return context.prisma.notification({ id: parent.id }).announcement();
+}
+
+function chat(parent, __, context) {
+  return context.prisma.notification({ id: parent.id }).chat();
+}
   
   module.exports = {
-    profile
+    profile,
+    announcement,
+    chat
   };
