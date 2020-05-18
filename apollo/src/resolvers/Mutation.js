@@ -1,6 +1,5 @@
 //@ts-check
-
-const { AuthenticationError } = require('apollo-server');
+const { AuthenticationError } = require('apollo-server')
 
 // --------------------------------------------------------------------- Profile Mutations ---------------------------------------------------------------------
 
@@ -11,18 +10,18 @@ const { AuthenticationError } = require('apollo-server');
  */
 const createProfile = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === 'undefined') {
-    context.logger.error('API called by unauthenticated user');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.createProfile: %O', currentUser);
+  context.logger.debug('Mutation.createProfile: %O', currentUser)
 
   // Creates a profile based on args data
-  const profile = await context.prisma.createProfile(args.data);
+  const profile = await context.prisma.createProfile(args.data)
 
-  return profile;
-};
+  return profile
+}
 
 /**
  * @param {{ data: import('../generated/prisma-client').ProfileUpdateInput, where: import('../generated/prisma-client').ProfileWhereUniqueInput }} args
@@ -31,17 +30,17 @@ const createProfile = async (_, args, context) => {
  */
 const updateProfile = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === 'undefined') {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated')
   }
   context.logger.debug('Mutation.updateProfile: %O', currentUser);
   // Updates a profile with args passed in
-  const profile = await context.prisma.updateProfile(args);
+  const profile = await context.prisma.updateProfile(args)
 
-  return profile;
-};
+  return profile
+}
 
 /**
  * @param {{ where: import('../generated/prisma-client').ProfileWhereUniqueInput }} args
@@ -50,17 +49,17 @@ const updateProfile = async (_, args, context) => {
  */
 const deleteProfile = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === 'undefined') {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.deleteProfile: %O', currentUser);
+  context.logger.debug('Mutation.deleteProfile: %O', currentUser)
   // Deletes a profile with args passed in
-  const profile = await context.prisma.deleteProfile(args.where);
+  const profile = await context.prisma.deleteProfile(args.where)
 
-  return profile;
-};
+  return profile
+}
 
 // --------------------------------------------------------------------- Event Mutations ---------------------------------------------------------------------
 
@@ -71,17 +70,17 @@ const deleteProfile = async (_, args, context) => {
  */
 const createEvent = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === 'undefined') {
-    context.logger.error('Api called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('Api called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.createEvent: %O', currentUser);
+  context.logger.debug('Mutation.createEvent: %O', currentUser)
   // Creates an event based on args data
-  const event = context.prisma.createEvent(args.data);
+  const event = context.prisma.createEvent(args.data)
 
-  return event;
-};
+  return event
+}
 
 /**
  * @param {{ data: import('../generated/prisma-client').EventUpdateInput, where: import('../generated/prisma-client').EventWhereUniqueInput }} args
@@ -90,17 +89,17 @@ const createEvent = async (_, args, context) => {
  */
 const updateEvent = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === 'undefined') {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.updateEvent: %O', currentUser);
+  context.logger.debug('Mutation.updateEvent: %O', currentUser)
   // Updates an event with args passed in
-  const event = await context.prisma.updateEvent(args);
+  const event = await context.prisma.updateEvent(args)
 
-  return event;
-};
+  return event
+}
 
 /**
  * @param {{ where: import('../generated/prisma-client').EventWhereUniqueInput }} args
@@ -109,17 +108,17 @@ const updateEvent = async (_, args, context) => {
  */
 const deleteEvent = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === 'undefined') {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.deleteEvent: %O', currentUser);
+  context.logger.debug('Mutation.deleteEvent: %O', currentUser)
   // Deletes an Event with args passed in
-  const event = await context.prisma.deleteEvent(args.where);
+  const event = await context.prisma.deleteEvent(args.where)
 
-  return event;
-};
+  return event
+}
 
 // --------------------------------------------------------------------- Event Mutations ---------------------------------------------------------------------
 
@@ -130,17 +129,17 @@ const deleteEvent = async (_, args, context) => {
  */
 const createActivity = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated')
   }
-  context.logger.debug('Mutation.createActivity: %O', currentUser);
+  context.logger.debug('Mutation.createActivity: %O', currentUser)
   // Creates an activity based on args data
-  const activity = context.prisma.createActivity(args.data);
+  const activity = context.prisma.createActivity(args.data)
 
-  return activity;
-};
+  return activity
+}
 /**
  * @param {{ data: import('../generated/prisma-client').ActivityUpdateInput, where: import('../generated/prisma-client').ActivityWhereUniqueInput }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
@@ -148,17 +147,17 @@ const createActivity = async (_, args, context) => {
  */
 const updateActivity = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.updateActivity: %O', currentUser);
+  context.logger.debug('Mutation.updateActivity: %O', currentUser)
   // Updates an activity with args passed in
-  const activity = await context.prisma.updateActivity(args);
+  const activity = await context.prisma.updateActivity(args)
 
-  return activity;
-};
+  return activity
+}
 
 /**
  * @param {{ where: import('../generated/prisma-client').ActivityWhereUniqueInput }} args
@@ -167,17 +166,17 @@ const updateActivity = async (_, args, context) => {
  */
 const deleteActivity = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.deleteActivity: %O', currentUser);
+  context.logger.debug('Mutation.deleteActivity: %O', currentUser)
   // Deletes an activity with args passed in
-  const activity = await context.prisma.deleteActivity(args.where);
+  const activity = await context.prisma.deleteActivity(args.where)
 
-  return activity;
-};
+  return activity
+}
 
 /**
  * @param {{ data: import('../generated/prisma-client').ParticipantCreateInput }} args
@@ -186,17 +185,17 @@ const deleteActivity = async (_, args, context) => {
  */
 const createParticipant = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated')
   }
-  context.logger.debug('Mutation.createParticipant: %O', currentUser);
+  context.logger.debug('Mutation.createParticipant: %O', currentUser)
   // Creates a participant based on args data
-  const participant = context.prisma.createParticipant(args.data);
+  const participant = context.prisma.createParticipant(args.data)
 
-  return participant;
-};
+  return participant
+}
 /**
  * @param {{ data: import('../generated/prisma-client').ParticipantUpdateInput, where: import('../generated/prisma-client').ParticipantWhereUniqueInput }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
@@ -204,17 +203,17 @@ const createParticipant = async (_, args, context) => {
  */
 const updateParticipant = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.updateParticipant: %O', currentUser);
+  context.logger.debug('Mutation.updateParticipant: %O', currentUser)
   // Updates a participant with args passed in
-  const participant = await context.prisma.updateParticipant(args);
+  const participant = await context.prisma.updateParticipant(args)
 
-  return participant;
-};
+  return participant
+}
 /**
  * @param {{ where: import('../generated/prisma-client').ParticipantWhereUniqueInput, create: import('../generated/prisma-client').ParticipantCreateInput, update: import('../generated/prisma-client').ParticipantUpdateInput }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
@@ -222,17 +221,17 @@ const updateParticipant = async (_, args, context) => {
  */
 const upsertParticipant = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.upsertParticipant: %O', currentUser);
+  context.logger.debug('Mutation.upsertParticipant: %O', currentUser)
   // Upserts an participant with args passed in
-  const participant = await context.prisma.upsertParticipant(args);
+  const participant = await context.prisma.upsertParticipant(args)
 
-  return participant;
-};
+  return participant
+}
 
 /**
  * @param {{ where: import('../generated/prisma-client').ParticipantWhereUniqueInput }} args
@@ -241,17 +240,17 @@ const upsertParticipant = async (_, args, context) => {
  */
 const deleteParticipant = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.deleteParticipant: %O', currentUser);
+  context.logger.debug('Mutation.deleteParticipant: %O', currentUser)
   // Deletes a participant with args passed in
-  const participant = await context.prisma.deleteParticipant(args.where);
+  const participant = await context.prisma.deleteParticipant(args.where)
 
-  return participant;
-};
+  return participant
+}
 
 // --------------------------------------------------------------------- Chat Mutations ---------------------------------------------------------------------
 
@@ -262,17 +261,17 @@ const deleteParticipant = async (_, args, context) => {
  */
 const createChat = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.createChat: %O', currentUser);
+  context.logger.debug('Mutation.createChat: %O', currentUser)
   // Creates a chat
-  const chat = await context.prisma.createChat(args.data);
+  const chat = await context.prisma.createChat(args.data)
 
-  return chat;
-};
+  return chat
+}
 
 /**
  * @param {{ data: import('../generated/prisma-client').ChatUpdateInput, where: import('../generated/prisma-client').ChatWhereUniqueInput }} args
@@ -281,17 +280,17 @@ const createChat = async (_, args, context) => {
  */
 const updateChat = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.updateChat: %O', currentUser);
+  context.logger.debug('Mutation.updateChat: %O', currentUser)
   // Updates a chat
-  const chat = await context.prisma.updateChat(args);
+  const chat = await context.prisma.updateChat(args)
 
-  return chat;
-};
+  return chat
+}
 
 /**
  * @param {{ where: import('../generated/prisma-client').ChatWhereUniqueInput! }} args
@@ -300,17 +299,17 @@ const updateChat = async (_, args, context) => {
  */
 const deleteChat = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.deleteChat: %O', currentUser);
+  context.logger.debug('Mutation.deleteChat: %O', currentUser)
   // Deletes a chat
-  const chat = await context.prisma.deleteChat(args.where);
+  const chat = await context.prisma.deleteChat(args.where)
 
-  return chat;
-};
+  return chat
+}
 
 /**
  * @param {{ data: import('../generated/prisma-client').ChatRoomCreateInput! }} args
@@ -319,17 +318,17 @@ const deleteChat = async (_, args, context) => {
  */
 const createChatRoom = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.createChatRoom: %O', currentUser);
+  context.logger.debug('Mutation.createChatRoom: %O', currentUser)
   // Creates a chat room
-  const room = await context.prisma.createChatRoom(args.data);
+  const room = await context.prisma.createChatRoom(args.data)
 
-  return room;
-};
+  return room
+}
 
 /**
  * @param {{ data: import('../generated/prisma-client').ChatRoomUpdateInput, where: import('../generated/prisma-client').ChatRoomWhereUniqueInput }} args
@@ -338,17 +337,17 @@ const createChatRoom = async (_, args, context) => {
  */
 const updateChatRoom = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.updateChatRoom: %O', currentUser);
+  context.logger.debug('Mutation.updateChatRoom: %O', currentUser)
   // Updates a chat room
-  const room = await context.prisma.updateChatRoom(args);
+  const room = await context.prisma.updateChatRoom(args)
 
-  return room;
-};
+  return room
+}
 
 /**
  * @param {{ where: import('../generated/prisma-client').ChatRoomWhereUniqueInput! }} args
@@ -357,17 +356,17 @@ const updateChatRoom = async (_, args, context) => {
  */
 const deleteChatRoom = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.deleteChatRoom: %O', currentUser);
+  context.logger.debug('Mutation.deleteChatRoom: %O', currentUser)
   // Deletes a chat room
-  const room = await context.prisma.deleteChatRoom(args.where);
+  const room = await context.prisma.deleteChatRoom(args.where)
 
-  return room;
-};
+  return room
+}
 
 // --------------------------------------------------------------------- Announcement Mutations ---------------------------------------------------------------------
 
@@ -378,17 +377,17 @@ const deleteChatRoom = async (_, args, context) => {
  */
 const createAnnouncement = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.createAnnouncement: %O', currentUser);
+  context.logger.debug('Mutation.createAnnouncement: %O', currentUser)
   // Creates an announcement
-  const announcement = await context.prisma.createAnnouncement(args.data);
+  const announcement = await context.prisma.createAnnouncement(args.data)
 
-  return announcement;
-};
+  return announcement
+}
 
 /**
  * @param {{ data: import('../generated/prisma-client').AnnouncementUpdateInput!, where: import('../generated/prisma-client').AnnouncementWhereUniqueInput }} args
@@ -397,17 +396,17 @@ const createAnnouncement = async (_, args, context) => {
  */
 const updateAnnouncement = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.updateAnnouncement: %O', currentUser);
+  context.logger.debug('Mutation.updateAnnouncement: %O', currentUser)
   // Updates an announcement
-  const announcement = await context.prisma.updateAnnouncement(args);
+  const announcement = await context.prisma.updateAnnouncement(args)
 
-  return announcement;
-};
+  return announcement
+}
 
 /**
  * @param {{ where: import('../generated/prisma-client').AnnouncementWhereUniqueInput! }} args
@@ -416,17 +415,17 @@ const updateAnnouncement = async (_, args, context) => {
  */
 const deleteAnnouncement = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.deleteAnnouncement: %O', currentUser);
+  context.logger.debug('Mutation.deleteAnnouncement: %O', currentUser)
   // Deletes an announcement
-  const announcement = await context.prisma.deleteAnnouncement(args.where);
+  const announcement = await context.prisma.deleteAnnouncement(args.where)
 
-  return announcement;
-};
+  return announcement
+}
 
 // --------------------------------------------------------------------- Notifications Mutations ---------------------------------------------------------------------
 
@@ -437,17 +436,17 @@ const deleteAnnouncement = async (_, args, context) => {
  */
 const createNotification = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.createNotification: %O', currentUser);
+  context.logger.debug('Mutation.createNotification: %O', currentUser)
   // Creates a notification
-  const notification = await context.prisma.createNotification(args.data);
+  const notification = await context.prisma.createNotification(args.data)
 
-  return notification;
-};
+  return notification
+}
 
 /**
  * @param {{ data: import('../generated/prisma-client').NotificationUpdateInput!, where: import('../generated/prisma-client').NotificationWhereUniqueInput }} args
@@ -456,17 +455,17 @@ const createNotification = async (_, args, context) => {
  */
 const updateNotification = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.updateNotification: %O', currentUser);
+  context.logger.debug('Mutation.updateNotification: %O', currentUser)
   // Updates a notification
-  const notification = await context.prisma.updateNotification(args);
+  const notification = await context.prisma.updateNotification(args)
 
-  return notification;
-};
+  return notification
+}
 
 /**
  * @param {{ where: import('../generated/prisma-client').NotificationWhereUniqueInput! }} args
@@ -475,17 +474,17 @@ const updateNotification = async (_, args, context) => {
  */
 const deleteNotification = async (_, args, context) => {
   // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
+  const currentUser = await context.user
   if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
+    context.logger.error('API called by unauthenticated user.')
+    throw new AuthenticationError('Must be authenticated.')
   }
-  context.logger.debug('Mutation.deleteNotification: %O', currentUser);
+  context.logger.debug('Mutation.deleteNotification: %O', currentUser)
   // Deletes a notification
-  const notification = await context.prisma.deleteNotification(args.where);
+  const notification = await context.prisma.deleteNotification(args.where)
 
-  return notification;
-};
+  return notification
+}
 
 
 module.exports = {
@@ -514,4 +513,4 @@ module.exports = {
   createNotification, 
   updateNotification,
   deleteNotification
-};
+}

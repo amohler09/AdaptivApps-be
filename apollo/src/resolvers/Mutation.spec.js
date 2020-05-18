@@ -8,7 +8,6 @@ const { createProfile, createActivity, createEvent, updateProfile, updateEvent, 
 const mockContext = require('../context')
 jest.mock('../context')
 
-
 // --------------------------------Create Profile -------------------------------------
 
 it('Creates profile', async () => {
