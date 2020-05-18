@@ -1,14 +1,11 @@
 const { AuthenticationError } = require('apollo-server') 
-
-
 // --------------------------------------------------------------------- Chat Subscription ---------------------------------------------------------------------
-
 /**
  * @param {{ where: import('../generated/prisma-client').ChatSubscriptionWhereInput }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
-function newChatSubscribe(parent, args, context, info) {
+function newChatSubscribe (parent, args, context, info) {
   if (typeof context.user === 'undefined') {
     context.logger.error('API called by unauthenticated user')
     throw new AuthenticationError('Must be authenticated')
@@ -16,7 +13,7 @@ function newChatSubscribe(parent, args, context, info) {
   context.logger.debug('Subscription.chat: %O', context.user)
 
   return context.prisma.$subscribe.chat({ mutation_in: ['CREATED', 'UPDATED', 'DELETED']})
-}
+  }
 
 
 /**
@@ -24,7 +21,7 @@ function newChatSubscribe(parent, args, context, info) {
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
-function newChatRoomSubscribe(parent, args, context, info) {
+function newChatRoomSubscribe (parent, args, context, info) {
   if (typeof context.user === 'undefined') {
     context.logger.error('API called by unauthenticated user')
     throw new AuthenticationError('Must be authenticated')
@@ -32,7 +29,7 @@ function newChatRoomSubscribe(parent, args, context, info) {
   context.logger.debug('Subscription.chat: %O', context.user)
 
   return context.prisma.$subscribe.chatRoom({ mutation_in: ['CREATED', 'UPDATED', 'DELETED']})
-}
+  }
 
 // --------------------------------------------------------------------- Announcement Subscription ---------------------------------------------------------------------
 
@@ -41,7 +38,7 @@ function newChatRoomSubscribe(parent, args, context, info) {
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
-function newAnnouncementSubscribe(parent, args, context, info) {
+function newAnnouncementSubscribe (parent, args, context, info) {
   if (typeof context.user === 'undefined') {
     context.logger.error('API called by unauthenticated user')
     throw new AuthenticationError('Must be authenticated')
@@ -49,7 +46,7 @@ function newAnnouncementSubscribe(parent, args, context, info) {
   context.logger.debug('Subscription.announcement: %O', context.user)
 
   return context.prisma.$subscribe.announcement({ mutation_in: ['CREATED', 'UPDATED', 'DELETED']})
-}
+ }
 
 // --------------------------------------------------------------------- Notification Subscription ---------------------------------------------------------------------
 
@@ -58,7 +55,7 @@ function newAnnouncementSubscribe(parent, args, context, info) {
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
  */
-function newNotificationSubscribe(parent, args, context, info) {
+function newNotificationSubscribe (parent, args, context, info) {
   if (typeof context.user === 'undefined') {
     context.logger.error('API called by unauthenticated user')
     throw new AuthenticationError('Must be authenticated')
@@ -66,8 +63,7 @@ function newNotificationSubscribe(parent, args, context, info) {
   context.logger.debug('Subscription.notification: %O', context.user)
 
   return context.prisma.$subscribe.notification({ mutation_in: ['CREATED', 'UPDATED', 'DELETED']})
-}
-
+  }
 
 // CHAT SUBSCRIPTION RETURN
 const chat = {
@@ -75,7 +71,7 @@ const chat = {
   resolve: payload => {
     return payload
   }
-}
+ }
 
 // CHAT ROOM SUBSCRIPTION RETURN
 const chatRoom = {

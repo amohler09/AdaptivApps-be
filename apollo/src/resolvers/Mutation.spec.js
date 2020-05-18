@@ -8,19 +8,17 @@ const { createProfile, createActivity, createEvent, updateProfile, updateEvent, 
 const mockContext = require('../context')
 jest.mock('../context')
 
-
 // --------------------------------Create Profile -------------------------------------
-
 it('Creates profile', async () => {
 
   // Add something to the input
-  generatedPrismaInput.email = "sometest@email"
+  generatedPrismaInput.email = 'sometest@email'
 
   // We need to pass these args, just like Apollo would
-  const args = { data: generatedPrismaInput}
+  const args = { data: generatedPrismaInput }
 
   // Wait for the createProfile (the unit under test) to complete
-  await createProfile("", args, mockContext)
+  await createProfile('', args, mockContext)
 
   // Be sure that the unit under test called the underlying Prisma client with the input we gave it
   expect(mockContext.prisma.createProfile).toHaveBeenCalledWith(generatedPrismaInput)
@@ -28,22 +26,21 @@ it('Creates profile', async () => {
 
 it('Has correct profile information', async () => {
   // Add something to the input
-  generatedPrismaInput.email = "sometest@email";
-  generatedPrismaInput.firstName = "Jimmy"
-  generatedPrismaInput.lastName = "Washington"
-
+  generatedPrismaInput.email = 'sometest@email'
+  generatedPrismaInput.firstName = 'Jimmy'
+  generatedPrismaInput.lastName = 'Washington'
 
   // We need to pass these args, just like Apollo would
-  const args = { data: generatedPrismaInput}
+  const args = { data: generatedPrismaInput }
 
   // Wait for the createProfile (the unit under test) to complete
-  await createProfile("", args, mockContext)
+  await createProfile('', args, mockContext)
 
   // Be sure that the unit under test called the underlying Prisma client with the input we gave it
   expect(mockContext.prisma.createProfile).toHaveBeenCalledWith(expect.objectContaining({
-    email: "sometest@email",
-    firstName: "Jimmy",
-    lastName: "Washington"
+    email: 'sometest@email',
+    firstName: 'Jimmy',
+    lastName: 'Washington'
   }))
 })
 
@@ -51,20 +48,19 @@ it('Has correct profile information', async () => {
 
 it('Updates profile', async () => {
   // Add something to the input
-  generatedPrismaInput.email = "sometest@email"
-  generatedPrismaInput.firstName = "Brandob"
+  generatedPrismaInput.email = 'sometest@email'
+  generatedPrismaInput.firstName = 'Brandob'
 
   // We need to pass these args, just like Apollo would
-  const args = { email: "sometest@email", firstName: "Brandon"}
+  const args = { email: 'sometest@email', firstName: 'Brandon' }
 
   // Wait for the createProfile (the unit under test) to complete
-  await updateProfile("", args, mockContext)
+  await updateProfile('', args, mockContext)
 
   // Be sure that the unit under test called the underlying Prisma client with the input we gave it
   expect(mockContext.prisma.updateProfile).toHaveBeenCalledWith(expect.objectContaining({
-    email: "sometest@email",
-    firstName: "Brandon",
-  
+    email: 'sometest@email',
+    firstName: 'Brandon'
   }))
 })
 
@@ -101,33 +97,32 @@ it('Updates profile', async () => {
 
 it('Creates Event', async () => {
   
-  generatedPrismaInput.title = "State Games"
+  generatedPrismaInput.title = 'State Games'
 
   const args = { data: generatedPrismaInput }
 
-  await createEvent("", args, mockContext)
+  await createEvent('', args, mockContext)
 
   expect(mockContext.prisma.createEvent).toHaveBeenCalledWith(generatedPrismaInput)
 })
 
 it('Has correct profile information', async () => {
   // Add something to the input
-  generatedPrismaInput.title = "Summer Games";
-  generatedPrismaInput.startDate = "04/04/2020"
-  generatedPrismaInput.endDate = "04/18/2020"
-
+  generatedPrismaInput.title = 'Summer Games'
+  generatedPrismaInput.startDate = '04/04/2020'
+  generatedPrismaInput.endDate = '04/18/2020'
 
   // We need to pass these args, just like Apollo would
-  const args = { data: generatedPrismaInput}
+  const args = { data: generatedPrismaInput }
 
   // Wait for the createProfile (the unit under test) to complete
-  await createEvent("", args, mockContext)
+  await createEvent('', args, mockContext)
 
   // Be sure that the unit under test called the underlying Prisma client with the input we gave it
   expect(mockContext.prisma.createEvent).toHaveBeenCalledWith(expect.objectContaining({
-    title: "Summer Games",
-    startDate: "04/04/2020",
-    endDate: "04/18/2020"
+    title: 'Summer Games',
+    startDate: '04/04/2020',
+    endDate: '04/18/2020'
   }))
 })
 
@@ -135,22 +130,21 @@ it('Has correct profile information', async () => {
 
 it('Updates Event', async () => {
   // Add something to the input
-  generatedPrismaInput.title = "Simmer Games"
-  generatedPrismaInput.startDate = "04/04/2020"
-  generatedPrismaInput.endDate = "04/05/2020"
+  generatedPrismaInput.title = 'Simmer Games'
+  generatedPrismaInput.startDate = '04/04/2020'
+  generatedPrismaInput.endDate = '04/05/2020'
 
   // We need to pass these args, just like Apollo would
-  const args = { title: "Summer Games", startDate : "04/04/2020", endDate: "04/18/2020"}
+  const args = { title: 'Summer Games', startDate: '04/04/2020', endDate: '04/18/2020' }
 
   // Wait for the createProfile (the unit under test) to complete
-  await updateEvent("", args, mockContext)
+  await updateEvent('', args, mockContext)
 
   // Be sure that the unit under test called the underlying Prisma client with the input we gave it
   expect(mockContext.prisma.updateEvent).toHaveBeenCalledWith(expect.objectContaining({
-    title: "Summer Games", 
-    startDate : "04/04/2020", 
-    endDate: "04/18/2020"
-  
+    title: 'Summer Games', 
+    startDate: '04/04/2020', 
+    endDate: '04/18/2020'
   }))
 })
 
@@ -158,13 +152,13 @@ it('Updates Event', async () => {
 
 it('Creates Activity', async () => {
   // Add something to the input
-  generatedPrismaInput.name = "Track & Field"
+  generatedPrismaInput.name = 'Track & Field'
 
   // We need to pass these args, just like Apollo would
-  const args = { data: generatedPrismaInput}
+  const args = { data: generatedPrismaInput }
 
   // Wait for the createProfile (the unit under test) to complete
-  await createActivity("", args, mockContext)
+  await createActivity('', args, mockContext)
 
   // Be sure that the unit under test called the underlying Prisma client with the input we gave it
   expect(mockContext.prisma.createActivity).toHaveBeenCalledWith(generatedPrismaInput)
@@ -172,19 +166,19 @@ it('Creates Activity', async () => {
 
 it('Has correct profile information', async () => {
   // Add something to the input
-  generatedPrismaInput.name = "Archery"
-  generatedPrismaInput.event = "Summer Games"
+  generatedPrismaInput.name = 'Archery'
+  generatedPrismaInput.event = 'Summer Games'
   
   // We need to pass these args, just like Apollo would
   const args = { data: generatedPrismaInput}
 
   // Wait for the createProfile (the unit under test) to complete
-  await createActivity("", args, mockContext)
+  await createActivity('', args, mockContext)
 
   // Be sure that the unit under test called the underlying Prisma client with the input we gave it
   expect(mockContext.prisma.createActivity).toHaveBeenCalledWith(expect.objectContaining({
-    name : "Archery",
-    event : "Summer Games"
+    name: 'Archery',
+    event: 'Summer Games'
   }))
 })
 
@@ -192,27 +186,24 @@ it('Has correct profile information', async () => {
 
 it('Updates Activity', async () => {
   // Add something to the input
-  generatedPrismaInput.name = "Super Smash Bros"
-  generatedPrismaInput.startDate = "04/08/2020"
-  generatedPrismaInput.location = "Gym"
-  generatedPrismaInput.event = "Summer Games"
+  generatedPrismaInput.name = 'Super Smash Bros'
+  generatedPrismaInput.startDate = '04/08/2020'
+  generatedPrismaInput.location = 'Gym'
+  generatedPrismaInput.event = 'Summer Games'
 
   // We need to pass these args, just like Apollo would
-  const args = { name : "Super Smash Bros", startDate : "04/08/2020", location : "Gym", event : "Summer Games"
-}
+  const args = { name: 'Super Smash Bros', startDate: '04/08/2020', location: 'Gym', event: 'Summer Games' }
 
   // Wait for the createProfile (the unit under test) to complete
-  await updateActivity("", args, mockContext)
+  await updateActivity('', args, mockContext)
 
   // Be sure that the unit under test called the underlying Prisma client with the input we gave it
   expect(mockContext.prisma.updateActivity).toHaveBeenCalledWith(expect.objectContaining({
-    name: "Super Smash Bros", 
-    startDate : "04/08/2020", 
-    location : "Gym",
-    event : "Summer Games"
+    name: 'Super Smash Bros',
+    startDate: '04/08/2020',
+    location: 'Gym',
+    event: 'Summer Games'
   }))
 })
 
 //-----------------------------------Join Event -------------------------------------------------------------------------
-
-
