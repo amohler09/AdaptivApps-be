@@ -15,6 +15,7 @@ const Chat = require('./Chat')
 const ChatRoom = require('./ChatRoom')
 const Subscription = require('./Subscription')
 const Announcement = require('./Announcement')
+const Notification = require('./Notification')
 
 const resolvers = {
   Query,
@@ -26,7 +27,8 @@ const resolvers = {
   Participant,
   Chat,
   ChatRoom,
-  Announcement
+  Announcement,
+  Notification
 }
 
 module.exports = resolvers

@@ -16,7 +16,7 @@ type Profile @key(fields: "email") {
   receivedChats: [Chat] @relation(name: "ReceivedMessages" onDelete: CASCADE)
   chatRooms: [ChatRoom] @relation(name: "ChatRooms" onDelete: CASCADE)
   announcements: [Announcement] @relation(name: "Announcements")
-  notifications: [Notification] @relation(name: "Notifications", onDelete: CASCADE)
+  notifications: [Notification]! @relation(name: "Notifications", onDelete: CASCADE)
 }
 
 type Event {
@@ -64,7 +64,7 @@ type Chat {
   message: String!
   createdAt: DateTime! @createdAt
   room: ChatRoom @relation(name: "Room")
-  notification: [Notification] @relation(name: "ChatNotification")
+  notification: [Notification]! @relation(name: "ChatNotification")
 }
 
 type ChatRoom {
@@ -80,7 +80,7 @@ type Announcement {
   message: String!
   createdAt: DateTime! @createdAt
   isAnnouncementRoom: Boolean! 
-  notification: [Notification] @relation(name: "AnnouncementNotification")
+  notification: [Notification]! @relation(name: "AnnouncementNotification")
 }
 
 type Notification {
