@@ -58,3 +58,6 @@
 
 # import Subscription.notification from "./generated/prisma.graphql"
 # import NotificationSubscriptionPayload from "./generated/prisma.graphql"
+
+# import Subscription.profile from "./generated/prisma.graphql"
+# import ProfileSubscriptionPayload from "./generated/prisma.graphql"
